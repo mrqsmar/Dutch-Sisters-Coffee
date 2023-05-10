@@ -1,65 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
-		<meta charset="UTF-8" />
-		<title>Dutch Sisters Coffee Management Application - Franchisees</title>
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<meta name="description" content="" />
-		<link rel="icon" href="favicon.png">
+		<title>Franchisees</title>
+		<link href="../styles/style.css" rel="stylesheet" type="text/css" />
+		<script language="JavaScript">
+			function showform(dowhat) {
+				/*
+				* four DIVS: browse, insert, update, delete
+				* this function sets one visible the others not
+				*/
+				if (dowhat == 'insert'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'block';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'none';
+				}
+				else if (dowhat == 'update'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'block';
+					document.getElementById('delete').style.display = 'none';
+				}
+				else if (dowhat == 'delete'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'block';
+				}
+				else if (dowhat == 'all'){
+					document.getElementById('browse').style.display = 'block';
+					document.getElementById('insert').style.display = 'block';
+					document.getElementById('update').style.display = 'block';
+					document.getElementById('delete').style.display = 'block';
+				}
+				else { //by default display browse
+					document.getElementById('browse').style.display = 'block';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'none';
+				}
+			}
+			function newFranchisee() { showform('insert'); }
+			function updateFranchisee(pid) { showform('update'); }
+			function deleteFranchisee(pid) { showform ('delete'); }
+			function browseFranchisees() { showform ('browse'); }
+			function showAll() { showform ('all'); }
+		</script>
 	</head>
-	<body>
-		<h1>Welcome!</h1>
-		<p>This is the Dutch Sisters Coffee Management Application. Authorized use only!</p>
-		<br>
-		<h2>Franchisees Data Management</h2>
-		<table>
-			<thead>
-			  <tr>
-				<th>Franchisee ID</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Actions</th>
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr>
-				<td>1</td>
-				<td>John</td>
-				<td>Doe</td>
-				<td>
-				  <button>Delete</button>
-				  <button>Update</button>
-				</td>
-			  </tr>
-			  <tr>
-				<td>2</td>
-				<td>Jane</td>
-				<td>Smith</td>
-				<td>
-				  <button>Delete</button>
-				  <button>Update</button>
-				</td>
-			  </tr>
-			  <tr>
-				<td>3</td>
-				<td>Bob</td>
-				<td>Jones</td>
-				<td>
-				  <button>Delete</button>
-				  <button>Update</button>
-				</td>
-			  </tr>
-			  <!-- Add more rows as needed -->
-			</tbody>
-			<tfoot>
+
+	<body onload="browseFranchisees()">
+		<h1>Franchisees</h1>
+		<p>Use the links below to find the page you need:</p>
+		<nav>
+			[ <a href="/cafes">Cafes</a> | <a href="./cafes_franchisees">Cafes and Franchisees</a> | <a href="/dues_owed">Dues Owed</a> | <a href="/franchisees">Franchisees</a> | <a href="/inventory_items">Inventory Items</a> |  <a href="/inventory_orders">Inventory Orders</a> | <a href="/sale_items">Sale Items</a> | <a href="/sales">Sales</a> ]
+		</nav>
+	
+		<div id="browse">
+			<p><a href="#" onClick="showAll()">Display all forms</a> </p>
+			<table border="1" cellpadding="5">
 				<tr>
-				  <td colspan="3"></td>
-				  <td>
-					<button>Add</button>
-				  </td>
+					<th><a href="#" onClick="newFranchisee()">New</a></th>
+					<th></th>
+					<th>id</th>
+					<th>first_name</th>
+					<th>last_name</th>
 				</tr>
-			  </tfoot>
-		  </table>
-		  
+				<tr>
+					<td><a href="#" onClick="updateFranchisee('this.FranchiseeID')">Edit</a></td>
+					<td><a href="#" onclick="deleteFranchisee('this.FranchiseeID')">Delete</a></td>
+					<td align="right">1</td>
+					<td>Bob</td>
+					<td>Gumbo</td>
+				</tr>
+				<tr>
+					<td><a href="#" onClick="updateFranchisee('this.FranchiseeID')">Edit</a></td>
+					<td><a href="#" onclick="deleteFranchisee('this.FranchiseeID')">Delete</a></td>
+					<td align="right">2</td>
+					<td>Jeff</td>
+					<td>Trombone</td>
+				</tr>
+				<tr>
+					<td><a href="#" onClick="updateFranchisee('this.FranchiseeID')">Edit</a></td>
+					<td><a href="#" onclick="deleteFranchisee('this.FranchiseeID')">Delete</a></td>
+					<td align="right">3</td>
+					<td>Tiffany</td>
+					<td>Wiffney</td>
+				</tr>
+				<tr>
+					<td><a href="#" onClick="updateFranchisee('this.FranchiseeID')">Edit</a></td>
+					<td><a href="#" onclick="deleteFranchisee('this.FranchiseeID')">Delete</a></td>
+					<td align="right">4</td>
+					<td>Lugubrious</td>
+					<td>Jackson</td>
+				</tr>
+				<tr>
+					<td><a href="#" onClick="updateFranchisee('this.FranchiseeID')">Edit</a></td>
+					<td><a href="#" onclick="deleteFranchisee('this.FranchiseeID')">Delete</a></td>
+					<td align="right">5</td>
+					<td>Felix</td>
+					<td>Felicia</td>
+				</tr>
+			</table>
+			<p>&nbsp;</p>
+		</div> <!-- browse -->
+		
+		<div id="insert">
+			<form method="POST" id="addFranchisee">
+				<legend><strong>Add Franchisee</strong></legend>
+				<fieldset class="fields">
+					<label> first name </label> <input type="text" name="firstName">
+					<label> last name </label> <input type="text" name="lastName">
+				</fieldset>
+				<input class="btn" type="submit" id="addFranchisee" value="Add Franchisee">
+				<input class="btn" type="button" value="cancel" onClick="browseFranchisees()">
+			</form>
+		</div><!-- insert -->
+		
+		<p>&nbsp;</p>
+		<div id="update">
+			<form method="POST" id="UpdateFranchisee">
+				<legend><strong>Update Franchisee</strong></legend>
+				<fieldset class="fields">
+					<input type="hidden">
+					<label> ID: </label> 1
+					<label> first name </label> <input type="text" name="firstName" value="Bob">
+					<label> last name </label> <input type="text" name="lastName" value="Gumbo">
+				</fieldset>
+					<input class="btn" type="submit" id="UpdateSaveFranchisee" value="Save Update Franchisee">
+					<input class="btn" type="button" value="cancel" onClick="browseFranchisees()">
+			</form> 
+			</div><!-- update -->
+			
+			<p>&nbsp;</p>
+			<div id="delete" style="display: block">
+			<form method="POST" id="deleteFranchisee">
+				<legend><strong>Delete Franchisee</strong></legend>
+					<fieldset class="fields">
+					<p>Are you sure you wish to delete the following?</p>
+					<input type="hidden" name="franchiseeID" id="deletefranchiseeID" value="1">
+					<label><strong>ID:</strong></label> 1
+					<label> <strong>Name</strong> </label> Bob Gumbo
+			</fieldset>
+			<input class="btn" type="submit" id="DeleteFranchisee" value="Delete Franchisee">
+					<input class="btn" type="button" value="cancel" onClick="browseFranchisees()">
+			</form> 
+			</div><!-- delete -->
 	</body>
 </html>
