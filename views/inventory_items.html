@@ -67,8 +67,8 @@
 					<th>remaining_stock</th>
 				</tr>
 				<tr>
-					<td><a href="#" onClick="updateCafe('this.cafeID')">Edit</a></td>
-					<td><a href="#" onclick="deleteCafe('this.cafeID')">Delete</a></td>
+					<td><a href="#" onClick="updateCafe('this.inventoryItemID')">Edit</a></td>
+					<td><a href="#" onclick="deleteCafe('this.inventoryItemID')">Delete</a></td>
 					<td align="right">1</td>
 					<td>12oz cup</td>
 					<td>0.10</td>
@@ -79,17 +79,14 @@
 		</div> <!-- browse -->
 		
 		<div id="insert">
-			<form method="POST" id="addCafe">
+			<form method="POST" id="addInventoryItem">
 				<legend><strong>Add Cafe</strong></legend>
 				<fieldset class="fields">
-					<label> street address </label> <input type="text" name="streetAddress">
-					<label> street name </label> <input type="text" name="streetName">
-					<label> city </label> <input type="text" name="city">
-					<label> state </label> <input type="text" name="state">
-					<label> country </label> <input type="text" name="country">
-					<label> zip code </label> <input type="text" name="zipCode">
+					<label> item name </label> <input type="text" name="itemName">
+					<label> item price </label> <input type="text" name="itemPrice">
+					<label> remaining stock </label> <input type="text" name="remainingStock">
 				</fieldset>
-				<input class="btn" type="submit" id="addCafe" value="Add Cafe">
+				<input class="btn" type="submit" id="addInventoryItem" value="Add Inventory Item">
 				<input class="btn" type="button" value="cancel" onClick="browseInventoryItems()">
 			</form>
 		</div><!-- insert -->
