@@ -30,6 +30,7 @@ CREATE OR REPLACE TABLE Cafes_Franchisees (
     FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id),
 	cafe_id INT(11) NOT NULL,
 	FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id),
+	ON DELETE CASCADE,
 	PRIMARY KEY (id)
 );
 
@@ -49,7 +50,9 @@ CREATE OR REPLACE TABLE Sales (
 	sale_date date NOT NULL,
 	cafe_id int(11) NOT NULL,
 	FOREIGN KEY (item_sold) REFERENCES Sale_Items(sale_item_id),
+	ON DELETE CASCADE,
 	FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id),
+	ON DELETE CASCADE,
     PRIMARY KEY (sale_id)
 );
 
@@ -61,7 +64,9 @@ CREATE OR REPLACE TABLE Inventory_Orders (
 	quantity_ordered int(11) NOT NULL,
 	amount_due decimal(10,2) NOT NULL,
 	FOREIGN KEY (item_ordered) REFERENCES Inventory_Items(item_id),
+	ON DELETE CASCADE,
 	FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id),
+	ON DELETE CASCADE,
     PRIMARY KEY (order_id)
 );
 
@@ -73,6 +78,7 @@ CREATE OR REPLACE TABLE Dues_Owed (
 	due_date date NOT NULL,
 	late_fees decimal(10,2),
 	FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id),
+	ON DELETE CASCADE,
     PRIMARY KEY (dues_invoice_id)
 );
 
