@@ -1,10 +1,20 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
+DROP TABLE IF EXISTS Franchisees;
+DROP TABLE IF EXISTS Cafes;
+DROP TABLE IF EXISTS Cafes_Franchisees;
+DROP TABLE IF EXISTS Sales;
+DROP TABLE IF EXISTS Sale_Items;
+DROP TABLE IF EXISTS Inventory_Orders;
+DROP TABLE IF EXISTS Inventory_Items;
+DROP TABLE IF EXISTS Dues_Owed;
+DROP TABLE IF EXISTS Inventory_Items;
+
 -- Write the query to create the 8 tables below.
 
 -- Franchisees table
-CREATE OR REPLACE TABLE Franchisees (
+CREATE TABLE Franchisees (
     franchisee_id int(11) NOT NULL AUTO_INCREMENT,
     first_name varchar(255) NOT NULL,
 	last_name varchar(255) NOT NULL,
@@ -12,7 +22,7 @@ CREATE OR REPLACE TABLE Franchisees (
 );
 
 -- Cafes table
-CREATE OR REPLACE TABLE Cafes (
+CREATE TABLE Cafes (
     cafe_id int(11) NOT NULL AUTO_INCREMENT,
 	street_address int NOT NULL,
     street_name varchar(255) NOT NULL,
@@ -24,18 +34,17 @@ CREATE OR REPLACE TABLE Cafes (
 );
 
 -- Intersection table
-CREATE OR REPLACE TABLE Cafes_Franchisees (
+CREATE TABLE Cafes_Franchisees (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	franchisee_id INT(11) NOT NULL,
-    FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id),
 	cafe_id INT(11) NOT NULL,
-	FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id),
-	ON DELETE CASCADE,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	CONSTRAINT FK_Cafe_Franchisees_franchisee_id FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id) ON UPDATE CASCADE,
+	CONSTRAINT FK_Cafe_Franchisees_cafe_id FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON UPDATE CASCADE
 );
 
 -- Sale_Items table
-CREATE OR REPLACE TABLE Sale_Items (
+CREATE TABLE Sale_Items (
     sale_item_id int(11) NOT NULL AUTO_INCREMENT,
     item_name varchar(255) NOT NULL,
 	item_price decimal(10,2) NOT NULL,
@@ -43,47 +52,42 @@ CREATE OR REPLACE TABLE Sale_Items (
 );
 
 -- Sales table
-CREATE OR REPLACE TABLE Sales (
+CREATE TABLE Sales (
     sale_id int(11) NOT NULL AUTO_INCREMENT,
 	sale_amount decimal(10,2) NOT NULL,
 	item_sold int(11) NOT NULL,
 	sale_date date NOT NULL,
 	cafe_id int(11) NOT NULL,
-	FOREIGN KEY (item_sold) REFERENCES Sale_Items(sale_item_id),
-	ON DELETE CASCADE,
-	FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id),
-	ON DELETE CASCADE,
-    PRIMARY KEY (sale_id)
+    PRIMARY KEY (sale_id),
+	CONSTRAINT FK_Sales_item_sold FOREIGN KEY (item_sold) REFERENCES Sale_Items(sale_item_id) ON DELETE CASCADE,
+	CONSTRAINT FK_Sales_cafe_id FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON DELETE CASCADE
 );
 
 -- Inventory_Orders table
-CREATE OR REPLACE TABLE Inventory_Orders (
+CREATE TABLE Inventory_Orders (
     order_id int(11) NOT NULL AUTO_INCREMENT,
-	cafe_id int(11) NOT NULL,
-	item_ordered int(11) NOT NULL,
+	cafe_id int(11),
+	item_ordered int(11),
 	quantity_ordered int(11) NOT NULL,
 	amount_due decimal(10,2) NOT NULL,
-	FOREIGN KEY (item_ordered) REFERENCES Inventory_Items(item_id),
-	ON DELETE CASCADE,
-	FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id),
-	ON DELETE CASCADE,
-    PRIMARY KEY (order_id)
+    PRIMARY KEY (order_id),
+	CONSTRAINT FK_Inventory_Orders_item_ordered FOREIGN KEY (item_ordered) REFERENCES Inventory_Items(item_id) ON DELETE CASCADE,
+	CONSTRAINT FK_Inventory_Orders_cafe_id FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON DELETE CASCADE
 );
 
 -- Dues_Owed table
-CREATE OR REPLACE TABLE Dues_Owed (
+CREATE TABLE Dues_Owed (
     dues_invoice_id int(11) NOT NULL AUTO_INCREMENT,
 	franchisee_id int(11) NOT NULL,
 	amount_due decimal(10,2) NOT NULL,
 	due_date date NOT NULL,
 	late_fees decimal(10,2),
-	FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id),
-	ON DELETE CASCADE,
-    PRIMARY KEY (dues_invoice_id)
+    PRIMARY KEY (dues_invoice_id),
+	CONSTRAINT FK_Dues_Owed_franchisee_id FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id) ON DELETE CASCADE
 );
 
 -- Inventory_Items table
-CREATE OR REPLACE TABLE Inventory_Items (
+CREATE TABLE Inventory_Items (
     item_id int(11) NOT NULL AUTO_INCREMENT,
     item_name varchar(255) NOT NULL,
 	item_price decimal(10,2) NOT NULL,
