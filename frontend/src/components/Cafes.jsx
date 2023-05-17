@@ -19,8 +19,6 @@ const Cafes = () => {
     fetchAllCafes();
   }, []);
 
-  console.log(cafes);
-
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://flip2.engr.oregonstate.edu:8299/cafes/${id}`);
@@ -73,11 +71,42 @@ const Cafes = () => {
         </table>
       </div>
 
-      {/* <button className="addCafe">
-        <Link to="/add" style={{ color: "inherit", textDecoration: "none" }}>
-          Add new book
-        </Link>
-      </button> */}
+      {/* Adding a Cafe form */}
+      <div>
+        <form method="POST" id="addCafe">
+          <legend><strong>Add Cafe</strong></legend>
+          <fieldset class="fields">
+            <label> street address </label> <input type="text" name="streetAddress"></input>
+            <label> street name </label> <input type="text" name="streetName"></input>
+            <label> city </label> <input type="text" name="city"></input>
+            <label> state </label> <input type="text" name="state"></input>
+            <label> country </label> <input type="text" name="country"></input>
+            <label> zip code </label> <input type="text" name="zipCode"></input>
+          </fieldset>
+          <input class="btn" type="submit" id="addCafe" value="Add Cafe"></input>
+        </form>
+      </div>
+      
+      <br></br>
+
+      {/* Editing a Cafe form */}
+      <form method="PUT" id="UpdateCafe">
+				<legend><strong>Update Cafe</strong></legend>
+				<fieldset class="fields">
+					<input type="hidden"></input>
+					<label> ID: </label> 1
+					<label> street address </label> <input type="text" name="streetAddress" value="123"></input>
+					<label> street name </label> <input type="text" name="streetName" value="Santa Claus Lane"></input>
+					<label> city </label> <input type="text" name="city" value="North Pole"></input>
+					<label> state </label> <input type="text" name="state" value="AK"></input>
+					<label> country </label> <input type="text" name="country" value="USA"></input>
+					<label> zip code </label> <input type="text" name="zipCode" value="99999"></input>
+				</fieldset>
+					<input class="btn" type="submit" id="UpdateSaveCafe" value="Save Update Cafe"></input>
+			</form> 
+      
+      <br></br>
+
     </div>
   );
 };
