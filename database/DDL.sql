@@ -39,8 +39,8 @@ CREATE TABLE Cafes_Franchisees (
 	franchisee_id INT(11) NOT NULL,
 	cafe_id INT(11) NOT NULL,
 	PRIMARY KEY (id),
-	CONSTRAINT FK_Cafe_Franchisees_franchisee_id FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id) ON UPDATE CASCADE,
-	CONSTRAINT FK_Cafe_Franchisees_cafe_id FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON UPDATE CASCADE
+	CONSTRAINT fk_franchisees FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id) ON UPDATE CASCADE,
+	CONSTRAINT fk_cafes FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON UPDATE CASCADE
 );
 
 -- Sale_Items table
@@ -55,24 +55,24 @@ CREATE TABLE Sale_Items (
 CREATE TABLE Sales (
     sale_id int(11) NOT NULL AUTO_INCREMENT,
 	sale_amount decimal(10,2) NOT NULL,
-	item_sold int(11) NOT NULL,
 	sale_date date NOT NULL,
-	cafe_id int(11) NOT NULL,
+	sale_item_id int(11) NOT NULL,
+	cafe_id int(11) NULL,
     PRIMARY KEY (sale_id),
-	CONSTRAINT FK_Sales_item_sold FOREIGN KEY (item_sold) REFERENCES Sale_Items(sale_item_id) ON DELETE CASCADE,
-	CONSTRAINT FK_Sales_cafe_id FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON DELETE CASCADE
+	CONSTRAINT fk_Sales_item_sold FOREIGN KEY (sale_item_id) REFERENCES Sale_Items(sale_item_id) ON DELETE CASCADE,
+	CONSTRAINT fk_Sales_cafe_id FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON DELETE SET NULL
 );
 
 -- Inventory_Orders table
 CREATE TABLE Inventory_Orders (
     order_id int(11) NOT NULL AUTO_INCREMENT,
 	cafe_id int(11),
-	item_ordered int(11),
 	quantity_ordered int(11) NOT NULL,
 	amount_due decimal(10,2) NOT NULL,
+	item_id int(11),
     PRIMARY KEY (order_id),
-	CONSTRAINT FK_Inventory_Orders_item_ordered FOREIGN KEY (item_ordered) REFERENCES Inventory_Items(item_id) ON DELETE CASCADE,
-	CONSTRAINT FK_Inventory_Orders_cafe_id FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON DELETE CASCADE
+	CONSTRAINT fk_Inventory_Orders_item_ordered FOREIGN KEY (item_id) REFERENCES Inventory_Items(item_id) ON DELETE CASCADE,
+	CONSTRAINT fk_Inventory_Orders_cafe_id FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON DELETE SET NULL
 );
 
 -- Dues_Owed table
@@ -83,7 +83,7 @@ CREATE TABLE Dues_Owed (
 	due_date date NOT NULL,
 	late_fees decimal(10,2),
     PRIMARY KEY (dues_invoice_id),
-	CONSTRAINT FK_Dues_Owed_franchisee_id FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id) ON DELETE CASCADE
+	CONSTRAINT fk_Dues_Owed_franchisee_id FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id) ON DELETE CASCADE
 );
 
 -- Inventory_Items table
@@ -192,7 +192,7 @@ VALUES
 -- Sales Table
 INSERT INTO Sales(
 	sale_amount, 
-	item_sold, 
+	sale_item_id, 
 	sale_date,
 	cafe_id
 )
@@ -201,19 +201,19 @@ VALUES
 	2.49,
 	1,
 	'2023-05-03',
-	1
+	NULL
 ),
 (
 	4.49,
 	2,
 	'2023-03-25',
-	1
+	NULL
 ),
 (
 	5.29,
 	4,
 	'2023-04-01',
-	3
+	NULL
 );
 
 -- Sale_Items
@@ -242,7 +242,7 @@ VALUES
 -- Inventory_Orders
 INSERT INTO Inventory_Orders(
 	cafe_id, 
-	item_ordered, 
+	item_id, 
 	quantity_ordered,
 	amount_due
 )
