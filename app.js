@@ -53,7 +53,17 @@ app.delete("/cafes/:id", (req, res) => {
 
 
 
-
+// Franchisees table routes
+app.get("/franchisees", (req, res) => {
+	const q = "SELECT * FROM Franchisees";
+	db.pool.query(q, (err, data) => {
+		if (err) {
+			console.log(err);
+			return res.json(err);
+		}
+		return res.json(data);
+	});
+});
 
 
 
