@@ -1,17 +1,62 @@
 /*
     SETUP
 */
+const cors=require('cors');
+
 // Express
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        = 8299;                 // Set a port number at the top so it's easy to change in the future
+app.use(cors());
+app.use(express.json());
+
+const PORT = process.env.PORT || 8299;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 var db = require('./db-connector')
 
+
+// const { engine } = require('express-handlebars');
+// var exphbs = require('express-handlebars');     // Import express-handlebars
+// app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
+// app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+
 /*
     ROUTES
 */
+
+// app.get('/test', (req, res) => {
+// 	res.json("Hello there, I am JSON Darula");
+// })
+
+
+// Cafes table routes
+app.get("/cafes", (req, res) => {
+	const q = "SELECT * FROM Cafes";
+	db.pool.query(q, (err, data) => {
+		if (err) {
+			console.log(err);
+			return res.json(err);
+		}
+		return res.json(data);
+	});
+});
+
+app.delete("/cafes/:id", (req, res) => {
+	const cafeID = req.params.id;
+	const q = "DELETE FROM Cafes WHERE cafe_id=" + cafeID + ";";
+	console.log("Delete query is: " + q);
+	db.pool.query(q, [cafeID], (err, data) => {
+		if (err) return res.send(err);
+		return res.json(data);
+	});
+});
+
+
+
+
+
+
+
 
 // Send the index.html file at the base route
 app.get('/', function(req, res)
@@ -26,10 +71,10 @@ app.get('/franchisees', function(req, res)
 })
 
 // Send Cafes html
-app.get('/cafes', function(req, res)
-{
-	res.sendFile(`${__dirname}/views/cafes.html`);
-})
+// app.get('/cafes', function(req, res)
+// {
+// 	res.sendFile(`${__dirname}/views/cafes.html`);
+// })
 
 // Send Cafes_Franchisees html
 app.get('/cafes_franchisees', function(req, res)
