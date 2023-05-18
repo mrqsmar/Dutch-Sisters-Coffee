@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import DropdownComponent from './DropdownMenuField'
 
 const Cafes = () => {
   const [cafes, setCafes] = useState([]);
@@ -94,7 +95,7 @@ const Cafes = () => {
 				<legend><strong>Update Cafe</strong></legend>
 				<fieldset class="fields">
 					<input type="hidden"></input>
-					<label> ID: </label> 1
+					<label> ID: </label> <DropdownComponent ids={cafes.map(({ cafe_id }) => cafe_id)} />
 					<label> street address </label> <input type="text" name="streetAddress" value="123"></input>
 					<label> street name </label> <input type="text" name="streetName" value="Santa Claus Lane"></input>
 					<label> city </label> <input type="text" name="city" value="North Pole"></input>
