@@ -14,20 +14,9 @@ const PORT = process.env.PORT || 8299;                 // Set a port number at t
 // Database
 var db = require('./db-connector')
 
-
-// const { engine } = require('express-handlebars');
-// var exphbs = require('express-handlebars');     // Import express-handlebars
-// app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
-// app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
-
 /*
     ROUTES
 */
-
-// app.get('/test', (req, res) => {
-// 	res.json("Hello there, I am JSON Darula");
-// })
-
 
 // Cafes table routes
 app.get("/cafes", (req, res) => {
@@ -66,107 +55,83 @@ app.get("/franchisees", (req, res) => {
 });
 
 
+// Dues_Owed table routes
+app.get("/dues_owed", (req, res) => {
+	const q = "SELECT * FROM Dues_Owed";
+	db.pool.query(q, (err, data) => {
+		if (err) {
+			console.log(err);
+			return res.json(err);
+		}
+		return res.json(data);
+	});
+});
 
 
-// Send the index.html file at the base route
-app.get('/', function(req, res)
-{
-	res.sendFile(`${__dirname}/views/index.html`);
-})
-
-// Send Franchisees html
-app.get('/franchisees', function(req, res)
-{
-	res.sendFile(`${__dirname}/views/franchisees.html`);
-})
-
-// Send Cafes html
-// app.get('/cafes', function(req, res)
-// {
-// 	res.sendFile(`${__dirname}/views/cafes.html`);
-// })
-
-// Send Cafes_Franchisees html
-app.get('/cafes_franchisees', function(req, res)
-{
-	res.sendFile(`${__dirname}/views/cafes_franchisees.html`);
-})
-
-// Send Dues_Owed html
-app.get('/dues_owed', function(req, res)
-{
-	res.sendFile(`${__dirname}/views/dues_owed.html`);
-})
-
-// Send Inventory_Items html 
-app.get('/inventory_items', function(req, res)
-{
-	res.sendFile(`${__dirname}/views/inventory_items.html`);
-})
-
-// Send Inventory_Orders html 
-app.get('/inventory_orders', function(req, res)
-{
-	res.sendFile(`${__dirname}/views/inventory_orders.html`);
-})
-
-// Send Sales html 
-app.get('/sales', function(req, res)
-{
-	res.sendFile(`${__dirname}/views/sales.html`);
-})
-
-// Send Sale Items html 
-app.get('/sale_items', function(req, res)
-{
-	res.sendFile(`${__dirname}/views/sale_items.html`);
-})
+// Sales table routes
+app.get("/sales", (req, res) => {
+	const q = "SELECT * FROM Sales";
+	db.pool.query(q, (err, data) => {
+		if (err) {
+			console.log(err);
+			return res.json(err);
+		}
+		return res.json(data);
+	});
+});
 
 
+// Sale Items table routes
+app.get("/sale_items", (req, res) => {
+	const q = "SELECT * FROM Sale_Items";
+	db.pool.query(q, (err, data) => {
+		if (err) {
+			console.log(err);
+			return res.json(err);
+		}
+		return res.json(data);
+	});
+});
 
-// app.post('/', (req, res) => {
-// 	res.send('Got a POST request')
-// })
-	
-// app.put('/user', (req, res) => {
-// 	res.send('Got a PUT request at /user')
-// })
 
-// app.delete('/user', (req, res) => {
-// 	res.send('Got a DELETE request at /user')
-// })
+// Inventory Items table routes
+app.get("/inventory_items", (req, res) => {
+	const q = "SELECT * FROM Inventory_Items";
+	db.pool.query(q, (err, data) => {
+		if (err) {
+			console.log(err);
+			return res.json(err);
+		}
+		return res.json(data);
+	});
+});
 
-// app.get('/', function(req, res)
-// {
-// 	// Define our queries
-// 	query1 = 'DROP TABLE IF EXISTS diagnostic;';
-// 	query2 = 'CREATE TABLE diagnostic(id INT PRIMARY KEY AUTO_INCREMENT, text VARCHAR(255) NOT NULL);';
-// 	query3 = 'INSERT INTO diagnostic (text) VALUES ("MySQL is working!")';
-// 	query4 = 'SELECT * FROM diagnostic;';
 
-// 	// Execute every query in an asynchronous manner, we want each query to finish before the next one starts
+// Inventory Orders table routes
+app.get("/inventory_orders", (req, res) => {
+	const q = "SELECT * FROM Inventory_Orders";
+	db.pool.query(q, (err, data) => {
+		if (err) {
+			console.log(err);
+			return res.json(err);
+		}
+		return res.json(data);
+	});
+});
 
-// 	// DROP TABLE...
-// 	db.pool.query(query1, function (err, results, fields){
 
-// 		// CREATE TABLE...
-// 		db.pool.query(query2, function(err, results, fields){
+// Cafes and Franchisees table routes
+app.get("/cafes_franchisees", (req, res) => {
+	const q = "SELECT * FROM Cafes_Franchisees";
+	db.pool.query(q, (err, data) => {
+		if (err) {
+			console.log(err);
+			return res.json(err);
+		}
+		return res.json(data);
+	});
+});
 
-// 			// INSERT INTO...
-// 			db.pool.query(query3, function(err, results, fields){
-
-// 				// SELECT *...
-// 				db.pool.query(query4, function(err, results, fields){
-
-// 					// Send the results to the browser
-// 					let base = "<h1>MySQL Results:</h1>"
-// 					res.send(base + JSON.stringify(results));
-// 				});
-// 			});
-// 		});
-// 	});
-// });
-	
 	
 /*
     LISTENER
