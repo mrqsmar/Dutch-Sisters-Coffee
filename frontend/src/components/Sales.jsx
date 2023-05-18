@@ -47,8 +47,9 @@ const Sales = () => {
             <th><a href="#" onClick="newSale()">New</a></th>
             <th></th>
             <th>id</th>
-            <th>same_amount</th>
-            <th>item_sold</th>
+            <th>sale_amount</th>
+            <th>sale_date</th>
+            <th>sale_item_id</th>
             <th>cafe_id</th>
           </tr>
 
@@ -56,11 +57,11 @@ const Sales = () => {
               <tr key={sales.sale_id}>
                 <td><a href="#" onClick="editSale()">Edit</a></td>
                 <button className="delete" onClick={() => handleDelete(sales.sale_id)}>Delete</button>
-                <td>{sales.sales_id}</td>
+                <td>{sales.sale_id}</td>
                 <td>{sales.sale_amount}</td>
-                <td>{sales.item_sold}</td>
                 <td>{sales.sale_date}</td>
-                <td>{sales.cafe_id}</td>
+                <td>{sales.sale_item_id}</td>
+                <td>{sales.cafe_id || "NULL"}</td>
               </tr>
         ))}
         </table>
@@ -73,11 +74,11 @@ const Sales = () => {
 			<fieldset class="fields">
 				<label> sale amount </label> <input type="text" name="saleAmount"></input>
 				
-				{/* Should be a dropdown of all items available, since this is a fk */}
-				<label> item sold </label> <input type="text" name="itemSold"></input> 
-
-				{/* Should be a date input */}
+        {/* Should be a date input */}
 				<label> sale date </label> <input type="text" name="saleDate"></input> 
+
+				{/* Should be a dropdown of all items available, since this is a fk */}
+				<label> sale item sold </label> <input type="text" name="itemSold"></input> 
 				
 				{/* Should be a dropdown of all cafes available, since this is a fk */}
 				<label> cafe id </label> <input type="text" name="cafeId"></input> 
@@ -96,8 +97,8 @@ const Sales = () => {
 					<input type="hidden"></input>
 					<label> ID: </label> <DropdownComponent ids={sales.map(({ sale_id }) => sale_id)} />
 					<label> sale amount </label> <input type="text" name="saleAmount" value='temp'></input>
-					<label> item sold </label> <input type="text" name="itemSold" value='temp'></input>
 					<label> sale date </label> <input type="text" name="saleDate" value='temp'></input>
+          <label> sale item sold </label> <input type="text" name="itemSold" value='temp'></input>
 					<label> cafe id </label> <input type="text" name="cafeId" value='temp'></input>
 				</fieldset>
 					<input class="btn" type="submit" id="UpdateSaveSales" value="Save Update Sale"></input>

@@ -48,21 +48,20 @@ const InventoryOrders = () => {
             <th></th>
             <th>id</th>
             <th>cafe_id</th>
-            <th>item_ordered</th>
-			<th>quantity_ordered</th>
-			<th>amount_due</th>
+            <th>item_id</th>
+            <th>quantity_ordered</th>
+            <th>amount_due</th>
           </tr>
-
-
           {inventoryOrders.map((inventoryOrders) => (
               <tr key={inventoryOrders.order_id}>
                 <td><a href="#" onClick="editInventoryItem()">Edit</a></td>
                 <button className="delete" onClick={() => handleDelete(inventoryOrders.order_id)}>Delete</button>
+                <td>{inventoryOrders.order_id}</td>
                 <td>{inventoryOrders.cafe_id}</td>
-                <td>{inventoryOrders.item_ordered}</td>
+                <td>{inventoryOrders.item_id}</td>
                 <td>{inventoryOrders.quantity_ordered}</td>
-				<td>{inventoryOrders.amount_due}</td>
-              </tr>
+                <td>{inventoryOrders.amount_due}</td>
+            </tr>
         ))}
         </table>
       </div>

@@ -55,6 +55,7 @@ const CafesFranchisees = () => {
               <tr key={cafesFranchisees.id}>
                 <td><a href="#" onClick="editCafesFranchisees()">Edit</a></td>
                 <button className="delete" onClick={() => handleDelete(cafesFranchisees.id)}>Delete</button>
+                <td>{cafesFranchisees.id}</td>
                 <td>{cafesFranchisees.franchisee_id}</td>
                 <td>{cafesFranchisees.cafe_id}</td>
               </tr>
