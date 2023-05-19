@@ -13,9 +13,9 @@ SELECT * FROM Cafes;
 
 -- SELECT from Cafe Intersection table
 
-SELECT Cafe_Franchisees.ID FROM Cafe_Franchisees
-INNER JOIN Franchisees ON Cafe_Franchisees.franchisee_id = Franchisees.franchisee_id
-INNER JOIN Cafes ON Cafe_Franchisees.cafe_id = Cafes.cafe_id;
+SELECT id FROM Cafes_Franchisees
+INNER JOIN Franchisees ON Cafes_Franchisees.franchisee_id = Franchisees.franchisee_id
+INNER JOIN Cafes ON Cafes_Franchisees.cafe_id = Cafes.cafe_id;
 
 
 
@@ -36,7 +36,7 @@ INNER JOIN Cafes ON Sales.cafe_id = Cafes.cafe_id;
 -- SELECT from Inventory Orders table
 
 SELECT order_id, quantity_ordered, amount_due FROM Inventory_Orders
-INNER JOIN Inventory_Items ON Inventory_Orders.item_ordered = Inventory_Items.item_ordered
+INNER JOIN Inventory_Items ON Inventory_Orders.item_id = Inventory_Items.item_ordered
 INNER JOIN Cafes ON Inventory_Orders.cafe_id = Cafes.cafe_id;
 
 
@@ -108,29 +108,29 @@ VALUES
 -- Inserting fields and values to Sales
 INSERT INTO Sales (
     cafe_id, 
-	item_ordered, 
-	quantity_ordered,
-	amount_due
+	sale_item_id, 
+	sale_amount,
+	sale_date
 )
 VALUES
 (
     :cafe_id_from_dropdown_Input,
-    :item_orderedInput,
-    :quantity_orderedInput,
+    :sale_item_idInput,
+    :sale_amountInput,
     :amount_dueInput
 );
 
 -- Inserting fields and values to Inventory Orders
 INSERT INTO Inventory_Orders (
     cafe_id,
-    item_ordered,
+    item_id,
     quantity_ordered,
     amount_due
 )
 VALUES
 (
     :cafe_id_from_dropdown_Input,
-    :item_orderedInput,
+    :item_idInput,
     :quantity_orderedInput,
     :amount_dueInput
 );
@@ -178,10 +178,10 @@ UPDATE Cafes_Franchisees SET franchisee_id = :franchisee_id_from_dropdown_Input,
 UPDATE Sale_Items SET item_name = :item_nameInput, item_price = :item_priceInput WHERE sale_item_id = :sale_item_id_from_the_edit_button;
 
 -- Updating a Sale
-UPDATE Sales SET cafe_id = :cafe_id_from_dropdown_Input, item_ordered = :item_orderedInput, quantity_ordered = :quantity_orderedInput, amount_due = :amount_dueInput WHERE sale_id = :sale_id_from_the_edit_button;
+UPDATE Sales SET cafe_id = :cafe_id_from_dropdown_Input, sale_item_id = :sale_item_idInput, sale_date = :sale_dateInput, sale_amount = :sale_amountInput WHERE sale_id = :sale_id_from_the_edit_button;
 
 -- Updating an Inventory Order
-UPDATE Inventory_Orders SET cafe_id = :cafe_id_from_dropdown_Input, item_ordered = :item_orderedInput, quantity_ordered = :quantity_orderedInput, amount_due = :amount_dueInput WHERE order_id = :order_id_from_the_edit_button;
+UPDATE Inventory_Orders SET cafe_id = :cafe_id_from_dropdown_Input, item_id = :item_idInput, quantity_ordered = :quantity_orderedInput, amount_due = :amount_dueInput WHERE order_id = :order_id_from_the_edit_button;
 
 -- Updating a Due Owed
 UPDATE Dues_Owed SET franchisee_id = :franchisee_id_from_dropdown_Input, amount_due = :amount_dueInput, due_date = due_dateInput, late_fees = late_feesInput WHERE dues_invoice_id = :dues_invoice_id_from_the_edit_button;
