@@ -13,7 +13,7 @@ SELECT * FROM Cafes;
 
 -- SELECT from Cafe Intersection table
 
-SELECT id FROM Cafes_Franchisees
+SELECT id, Franchisees.franchisee_id, Cafes.cafe_id FROM Cafes_Franchisees
 INNER JOIN Franchisees ON Cafes_Franchisees.franchisee_id = Franchisees.franchisee_id
 INNER JOIN Cafes ON Cafes_Franchisees.cafe_id = Cafes.cafe_id;
 
@@ -29,14 +29,16 @@ SELECT * FROM Sale_Items;
 
 
 SELECT sale_id, sale_amount, sale_date FROM Sales
-INNER JOIN Sales_Items ON Sales.sale_item_id = Sale_Items.sale_item_id
-INNER JOIN Cafes ON Sales.cafe_id = Cafes.cafe_id;
+INNER JOIN Sale_Items ON Sales.sale_item_id = Sale_Items.sale_item_id
+INNER JOIN Cafes ON Sales.cafe_id = Cafes.cafe_id; 
+
+-- This line above is causing an error since the cafe_id is NULL on the Sales table
 
 
 -- SELECT from Inventory Orders table
 
 SELECT order_id, quantity_ordered, amount_due FROM Inventory_Orders
-INNER JOIN Inventory_Items ON Inventory_Orders.item_id = Inventory_Items.item_ordered
+INNER JOIN Inventory_Items ON Inventory_Orders.item_id = Inventory_Items.item_id
 INNER JOIN Cafes ON Inventory_Orders.cafe_id = Cafes.cafe_id;
 
 
