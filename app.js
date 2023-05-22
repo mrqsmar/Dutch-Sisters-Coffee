@@ -132,7 +132,18 @@ app.get("/cafes_franchisees", (req, res) => {
 	});
 });
 
-	
+app.delete("/cafes_franchisees/:id", (req, res) => {
+	const cafesFranchiseesID = req.params.id;
+	const q = "DELETE FROM Cafes_Franchisees WHERE id=" + cafesFranchiseesID + ";";
+	console.log("Delete query is: " + q);
+	db.pool.query(q, [cafesFranchiseesID], (err, data) => {
+		if (err) return res.send(err);
+		return res.json(data);
+	});
+});
+
+
+
 /*
     LISTENER
 */
