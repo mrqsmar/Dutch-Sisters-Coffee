@@ -2,8 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import DropdownComponent from './DropdownMenuField'
+import DropdownMenuField from './DropdownMenuField'
 
 const CafesFranchisees = () => {
   const [cafesFranchisees, setCafesFranchisees] = useState([]);
@@ -29,14 +28,44 @@ const CafesFranchisees = () => {
     }
   };
 
-  // const handleAdd = async (id) => {
-  //   try {
-  //     await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes/`);
-  //     window.location.reload()
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  // These 2 track the cafe id and franchisee id from the add form
+  const [franchiseeId, setFranchiseeId] = useState('');
+  const [cafeId, setCafeId] = useState('');
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(`http://flip2.engr.oregonstate.edu:8299/cafes_franchisees/`, {
+        franchisee_id: franchiseeId,
+        cafe_id: cafeId
+      });
+      window.location.reload()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+  // These 3 track the id, cafe id and franchisee id from the update form
+  const [updateId, setUpdateId ] = useState('');
+  const [updateFranchiseeId, setUpdateFranchiseeId] = useState('');
+  const [updateCafeId, setUpdateCafeId] = useState('');
+  
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes_franchisees/`, {
+        id: updateId,
+        franchisee_id: updateFranchiseeId,
+        cafe_id: updateCafeId
+      });
+      window.location.reload()
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -44,7 +73,6 @@ const CafesFranchisees = () => {
       <div className="cafesFranchisees">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newCafesFranchisees()">New</a></th>
             <th></th>
             <th>id</th>
             <th>franchisee_id</th>
@@ -53,7 +81,6 @@ const CafesFranchisees = () => {
 
           {cafesFranchisees.map((cafesFranchisees) => (
               <tr key={cafesFranchisees.id}>
-                <td><a href="#" onClick="editCafesFranchisees()">Edit</a></td>
                 <button className="delete" onClick={() => handleDelete(cafesFranchisees.id)}>Delete</button>
                 <td>{cafesFranchisees.id}</td>
                 <td>{cafesFranchisees.franchisee_id}</td>
@@ -65,43 +92,39 @@ const CafesFranchisees = () => {
 
       {/* Adding a new cafesFranchisees form */}
       <div>
-        <form method="POST" id="addCafesFranchisees">
+        <form id="addCafesFranchisees">
         	<legend><strong>Add Cafe Franchisees</strong></legend>
-			<fieldset class="fields">
+			    <fieldset class="fields">
 				
-				{/* Should be a dropdown of all cafes available, since this is a fk */}
-				<label> cafe id </label> <input type="text" name="cafeId"></input> 
+            {/* Should be a dropdown of all cafes available, since this is a fk */}
+            <label> cafe id </label> <input type="text" name="cafeId" onChange={(e) => setCafeId(e.target.value)}></input> 
 
-				{/* Should be a dropdown of all franchisees available, since this is a fk */}
-				<label> franchisee id </label> <input type="text" name="franchiseeId"></input> 
-		
-			</fieldset>
-			<input class="btn" type="submit" id="addCafesFranchisees" value="Add Cafe Franchisee"></input>
-		</form>
+            {/* Should be a dropdown of all franchisees available, since this is a fk */}
+            <label> franchisee id </label> <input type="text" name="franchiseeId" onChange={(e) => setFranchiseeId(e.target.value)}></input> 
+      
+          </fieldset>
+          <input class="btn" type="submit" id="addCafesFranchisees" value="Add Cafe Franchisee" onClick={handleAdd}></input>
+        </form>
       </div>
       
       <br></br>
 
       {/* Editing a line item form */}
-      <form method="PUT" id="UpdateCafeFranchisee">
+      <form id="UpdateCafeFranchisee">
 				<legend><strong>Update Cafe Franchisee</strong></legend>
 				<fieldset class="fields">
-					<input type="hidden"></input>
-					<label> ID: </label> <DropdownComponent ids={cafesFranchisees.map(({ id }) => id)} />
-					
-					{/* Should be a dropdown of all cafes available, since this is a fk */}
-					<label> cafe id </label> <input type="text" name="cafeId" value='temp'></input>
+          <label> ID: </label> <DropdownMenuField ids={cafesFranchisees.map(({ id }) => id)} onSelect={setUpdateId} />
 
-					{/* Should be a dropdown of all franchisees available, since this is a fk */}
-					<label> franchisee id </label> <input type="text" name="franchiseeId" value='temp'></input>
+            {/* Should be a dropdown of all cafes available, since this is a fk */}
+            <label> cafe id </label> <input type="text" name="cafeId" onChange={(e) => setUpdateCafeId(e.target.value)}></input> 
 
+            {/* Should be a dropdown of all franchisees available, since this is a fk */}
+            <label> franchisee id </label> <input type="text" name="franchiseeId" onChange={(e) => setUpdateFranchiseeId(e.target.value)}></input> 
 
 				</fieldset>
-					<input class="btn" type="submit" id="UpdateCafeFranchisees" value="Save Cafes Franchisee"></input>
+					<input class="btn" type="submit" id="UpdateCafeFranchisees" value="Save Cafes Franchisee" onClick={handleUpdate}></input>
 			</form> 
-      
       <br></br>
-
     </div>
   );
 };
