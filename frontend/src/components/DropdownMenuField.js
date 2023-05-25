@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-function DropdownMenuField({ ids }) {
-	console.log(ids);
-
+function DropdownMenuField({ ids, onSelect }) {
   const [selectedId, setSelectedId] = useState('');
 
   const handleSelect = (event) => {
-    setSelectedId(event.target.value);
+    const selectedId = event.target.value;
+    setSelectedId(selectedId);
+    onSelect(selectedId); // Call the callback function with the selected ID
   };
 
   return (
@@ -25,4 +25,3 @@ function DropdownMenuField({ ids }) {
 }
 
 export default DropdownMenuField;
-
