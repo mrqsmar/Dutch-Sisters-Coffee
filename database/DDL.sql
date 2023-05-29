@@ -39,8 +39,8 @@ CREATE TABLE Cafes_Franchisees (
 	franchisee_id INT(11) NOT NULL,
 	cafe_id INT(11) NOT NULL,
 	PRIMARY KEY (id),
-	CONSTRAINT fk_franchisees FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id) ON UPDATE CASCADE,
-	CONSTRAINT fk_cafes FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON UPDATE CASCADE
+	CONSTRAINT fk_franchisees FOREIGN KEY (franchisee_id) REFERENCES Franchisees(franchisee_id) ON DELETE CASCADE,
+	CONSTRAINT fk_cafes FOREIGN KEY (cafe_id) REFERENCES Cafes(cafe_id) ON DELETE CASCADE
 );
 
 -- Sale_Items table
