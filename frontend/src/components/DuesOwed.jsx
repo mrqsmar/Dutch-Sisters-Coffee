@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import DropdownComponent from './DropdownMenuField'
 
 const DuesOwed = () => {
@@ -29,14 +28,52 @@ const DuesOwed = () => {
     }
   };
 
-  // const handleAdd = async (id) => {
-  //   try {
-  //     await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes/`);
-  //     window.location.reload()
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  // These three track the amount due, due date and the late fees from the add form
+  const [franchisee_id, setFranchiseeId] = useState('');
+  const [amountDue, setAmountDue] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [lateFees, setLateFees] = useState('');
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(`http://flip2.engr.oregonstate.edu:8299/dues_owed/`, {
+        franchisee_id: franchisee_id,
+        amount_due: amountDue,
+        due_date: dueDate,
+        late_fees: lateFees
+      });
+      window.location.reload()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+    // update
+  const [updateDuesInvoiceId, setUpdateDuesInvoiceId] = useState('');
+  const [updateFranchiseeId, setUpdateFranchiseeId] = useState('');
+  const [updateAmountDue, setUpdateAmountDue] = useState('');
+  const [updateDueDate, setUpdateDueDate] = useState('');
+  const [updateLateFees, setUpdateLateFees] = useState('');
+  
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes_franchisees/`, {
+        dues_invoice_id: updateDuesInvoiceId,
+        franchisee_id: updateFranchiseeId,
+        amount_due: updateAmountDue,
+        due_date: updateDueDate,
+        late_fee: updateLateFees
+      });
+      window.location.reload()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   return (
     <div>
@@ -73,12 +110,12 @@ const DuesOwed = () => {
         <form method="POST" id="addDueOwed">
         	<legend><strong>Add Dues Owed</strong></legend>
 			<fieldset class="fields">
-				<label> ID: </label> <DropdownComponent ids={duesOwed.map(({ dues_invoice_id }) => dues_invoice_id)} />
-				<label> amount due </label> <input type="text" name="amountDue"></input>
-				<label> due date </label> <input type="text" name="dueDate"></input>
-				<label> late fees </label> <input type="text" name="lateFees"></input>
+        <label> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setFranchiseeId}/>
+				<label> Amount Due </label> <input type="text" name="amountDue" onChange={(e) => setAmountDue(e.target.value)}></input>
+				<label> Due Date </label> <input type="text" name="dueDate" onChange={(e) => setDueDate(e.target.value)}></input>
+				<label> Late Fees </label> <input type="text" name="lateFees" onChange={(e) => setLateFees(e.target.value)}></input>
 			</fieldset>
-			<input class="btn" type="submit" id="addDueOwed" value="Add Due Owed"></input>
+			<input class="btn" type="submit" id="addDueOwed" value="Add Due Owed" onClick={(handleAdd)}></input>
 		</form>
       </div>
       
@@ -89,12 +126,13 @@ const DuesOwed = () => {
 				<legend><strong>Update Due Owed</strong></legend>
 				<fieldset class="fields">
 					<input type="hidden"></input>
-					<label> ID: </label> <DropdownComponent ids={duesOwed.map(({ dues_invoice_id }) => dues_invoice_id)} />
-					<label> amount due </label> <input type="text" name="amountDue" value='temp'></input>
-					<label> due date </label> <input type="text" name="dueDate" value='temp'></input>
-					<label> late fees </label> <input type="text" name="lateFees" value='temp'></input>
+					<label> Dues Owed ID: </label> <DropdownComponent ids={duesOwed.map(({ dues_invoice_id }) => dues_invoice_id)} onSelect={setUpdateDuesInvoiceId}/>
+          <label> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setUpdateFranchiseeId}/>
+					<label> Amount Due </label> <input type="text" name="amountDue" value='temp' onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
+					<label> Due Date </label> <input type="text" name="dueDate" value='temp' onChange={(e) => setUpdateDueDate(e.target.value)}></input>
+					<label> Late Fees </label> <input type="text" name="lateFees" value='temp' onChange={(e) => setUpdateLateFees(e.target.value)}></input>
 				</fieldset>
-					<input class="btn" type="submit" id="UpdateSaveDuesOwed" value="Save Update Dues Owed"></input>
+					<input class="btn" type="submit" id="UpdateSaveDuesOwed" value="Save Update Dues Owed" onClick={(handleUpdate)}></input>
 			</form> 
       
       <br></br>
