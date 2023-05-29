@@ -36,7 +36,7 @@ app.get("/cafes", (req, res) => {
 	});
 });
 
-// Bug on delete here, fk constraint
+// Delete a cafe
 app.delete("/cafes/:id", (req, res) => {
 	const cafeID = req.params.id;
 	
