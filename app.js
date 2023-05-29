@@ -1,6 +1,7 @@
 /*
     SETUP
 */
+
 const cors=require('cors');
 
 // Express
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 8299;                 // Set a port number at t
 
 // Database
 var db = require('./db-connector')
+
 
 /*
     ROUTES
@@ -72,9 +74,6 @@ app.post('/cafes', function(req, res)
 
 // Update a cafe
 app.put('/cafes', function(req,res,next){
-	
-	console.log("Put request for cafes received, working now...")
-
 	let data = req.body;
 
 	let street_address = data.street_address;
@@ -97,7 +96,10 @@ app.put('/cafes', function(req,res,next){
 });
 
 
-// Franchisees table routes
+//////////////////////////////
+// Franchisees table routes //
+//////////////////////////////
+
 app.get("/franchisees", (req, res) => {
 	const q = "SELECT * FROM Franchisees";
 	db.pool.query(q, (err, data) => {
@@ -110,7 +112,11 @@ app.get("/franchisees", (req, res) => {
 });
 
 
-// Dues_Owed table routes
+////////////////////////////
+// Dues_Owed table routes //
+////////////////////////////
+
+// Get all dues owed
 app.get("/dues_owed", (req, res) => {
 	const q = "SELECT * FROM Dues_Owed";
 	db.pool.query(q, (err, data) => {
@@ -122,8 +128,65 @@ app.get("/dues_owed", (req, res) => {
 	});
 });
 
+// Delete a due owed
+app.delete("/dues_owed/:id", (req, res) => {
+	const dues_invoice_id = req.params.id;
+	
+	const q = "DELETE FROM Dues_Owed WHERE dues_invoice_id=" + dues_invoice_id + ";";
+	console.log("Delete query is: " + q);
 
-// Sales table routes
+	db.pool.query(q, [dues_invoice_id], (err, data) => {
+		if (err) return res.send(err);
+		return res.json(data);
+	});
+});
+
+// Add a new due owed
+app.post('/dues_owed', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+	let franchisee_id = data.franchisee_id;
+	let amount_due = data.amount_due;
+	let due_date = data.due_date;
+	let late_fees = data.late_fees;
+
+    // Create the query and run it on the database
+    q = `INSERT INTO Dues_Owed (franchisee_id, amount_due, due_date, late_fees) VALUES ('${franchisee_id}', '${amount_due}', '${due_date}', '${late_fees}');`;
+	console.log("Add query is: " + q);
+
+    db.pool.query(q, function(err){
+		if (err) return res.send(err);
+		return res.json(data);
+    })
+});
+
+// Update a due owed
+app.put('/dues_owed', function(req,res,next){
+	let data = req.body;
+
+	let franchisee_id = data.franchisee_id;
+	let amount_due = data.amount_due;
+	let due_date = data.due_date;
+	let late_fees = data.late_fees;
+	let dues_invoice_id = data.dues_invoice_id;
+
+	let q = `UPDATE Dues_Owed SET franchisee_id = ${franchisee_id}, amount_due = ${amount_due}, due_date = "${due_date}", late_fees = ${late_fees} WHERE dues_invoice_id = ${dues_invoice_id};`
+	console.log("Update query is: " + q);
+
+	// Run the query
+	db.pool.query(q, function(err){
+		if (err) return res.send(err);
+		return res.json(data);	
+  	})
+});
+
+
+////////////////////////
+// Sales table routes //
+////////////////////////
+
 app.get("/sales", (req, res) => {
 	const q = "SELECT * FROM Sales";
 	db.pool.query(q, (err, data) => {
@@ -135,8 +198,10 @@ app.get("/sales", (req, res) => {
 	});
 });
 
+/////////////////////////////
+// Sale Items table routes //
+/////////////////////////////
 
-// Sale Items table routes
 app.get("/sale_items", (req, res) => {
 	const q = "SELECT * FROM Sale_Items";
 	db.pool.query(q, (err, data) => {
@@ -149,7 +214,10 @@ app.get("/sale_items", (req, res) => {
 });
 
 
-// Inventory Items table routes
+//////////////////////////////////
+// Inventory Items table routes //
+//////////////////////////////////
+
 app.get("/inventory_items", (req, res) => {
 	const q = "SELECT * FROM Inventory_Items";
 	db.pool.query(q, (err, data) => {
@@ -162,7 +230,10 @@ app.get("/inventory_items", (req, res) => {
 });
 
 
-// Inventory Orders table routes
+///////////////////////////////////
+// Inventory Orders table routes //
+///////////////////////////////////
+
 app.get("/inventory_orders", (req, res) => {
 	const q = "SELECT * FROM Inventory_Orders";
 	db.pool.query(q, (err, data) => {
@@ -175,9 +246,11 @@ app.get("/inventory_orders", (req, res) => {
 });
 
 
-// Cafes and Franchisees table routes
+////////////////////////////////////////
+// Cafes and Franchisees table routes //
+////////////////////////////////////////
 
-// Read
+// Get all cafes franchisees
 app.get("/cafes_franchisees", (req, res) => {
 	const q = "SELECT * FROM Cafes_Franchisees";
 	db.pool.query(q, (err, data) => {
@@ -189,7 +262,7 @@ app.get("/cafes_franchisees", (req, res) => {
 	});
 });
 
-// Delete
+// Delete a row 
 app.delete("/cafes_franchisees/:id", (req, res) => {
 	const cafesFranchiseesID = req.params.id;
 	const q = "DELETE FROM Cafes_Franchisees WHERE id=" + cafesFranchiseesID + ";";
@@ -200,7 +273,7 @@ app.delete("/cafes_franchisees/:id", (req, res) => {
 	});
 });
 
-// Create
+// Create a row
 app.post('/cafes_franchisees', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
@@ -217,7 +290,7 @@ app.post('/cafes_franchisees', function(req, res)
     })
 });
 
-// Update
+// Update a row
 app.put('/cafes_franchisees', function(req,res,next){
 	let data = req.body;
 
@@ -234,7 +307,6 @@ app.put('/cafes_franchisees', function(req,res,next){
 		return res.json(data);	
   	})
 });
-
 
 
 /*
