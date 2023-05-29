@@ -18,7 +18,11 @@ var db = require('./db-connector')
     ROUTES
 */
 
-// Cafes table routes
+////////////////////////
+// Cafes table routes //
+////////////////////////
+
+// Get all cafes
 app.get("/cafes", (req, res) => {
 	const q = "SELECT * FROM Cafes";
 	db.pool.query(q, (err, data) => {
@@ -30,16 +34,67 @@ app.get("/cafes", (req, res) => {
 	});
 });
 
+// Bug on delete here, fk constraint
 app.delete("/cafes/:id", (req, res) => {
 	const cafeID = req.params.id;
+	
 	const q = "DELETE FROM Cafes WHERE cafe_id=" + cafeID + ";";
 	console.log("Delete query is: " + q);
+
 	db.pool.query(q, [cafeID], (err, data) => {
 		if (err) return res.send(err);
 		return res.json(data);
 	});
 });
 
+// Add a cafe
+app.post('/cafes', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+	let street_address = data.street_address;
+	let street_name = data.street_name;
+	let city = data.city;
+	let state = data.state;
+	let country = data.country;
+	let zip_code = data.zip_code;
+
+    // Create the query and run it on the database
+    q = `INSERT INTO Cafes (street_address, street_name, city, state, country, zip_code) VALUES ('${street_address}', '${street_name}', '${city}', '${state}', '${country}', '${zip_code}');`;
+	console.log("Add query is: " + q);
+
+    db.pool.query(q, function(err){
+		if (err) return res.send(err);
+		return res.json(data);
+    })
+});
+
+// Update a cafe
+app.put('/cafes', function(req,res,next){
+	
+	console.log("Put request for cafes received, working now...")
+
+	let data = req.body;
+
+	let street_address = data.street_address;
+	let street_name = data.street_name;
+	let city = data.city;
+	let state = data.state;
+	let country = data.country;
+	let zip_code = data.zip_code;
+	let cafe_id = data.cafe_id;
+
+
+	let q = `UPDATE Cafes SET street_address = "${street_address}", street_name = "${street_name}", city = "${city}", state = "${state}", country = "${country}", zip_code = ${zip_code} WHERE cafe_id = ${cafe_id};`
+	console.log("Update query is: " + q);
+
+	// Run the query
+	db.pool.query(q, function(err){
+		if (err) return res.send(err);
+		return res.json(data);	
+  	})
+});
 
 
 // Franchisees table routes
@@ -171,6 +226,7 @@ app.put('/cafes_franchisees', function(req,res,next){
 	let id = data.id;
 
 	let q = `UPDATE Cafes_Franchisees SET franchisee_id = ${franchisee_id}, cafe_id = ${cafe_id} WHERE id = ${id};`
+	console.log("Update query is: " + q);
 	
 	// Run the query
 	db.pool.query(q, function(err){
