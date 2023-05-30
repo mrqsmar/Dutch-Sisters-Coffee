@@ -20,6 +20,7 @@ const Franchisees = () => {
     fetchAllFranchisees();
   }, []);
 
+  // Deleting
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://flip2.engr.oregonstate.edu:8299/franchisees/${id}`);
@@ -29,14 +30,44 @@ const Franchisees = () => {
     }
   };
 
-  // const handleAdd = async (id) => {
-  //   try {
-  //     await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes/`);
-  //     window.location.reload()
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+
+  // Adding 2 to the add form
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  
+  const handleAdd = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(`http://flip2.engr.oregonstate.edu:8299/franchisees/`, {
+        first_name: firstName,
+        last_name: lastName
+      });
+      window.location.reload()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Updating these three to the update form
+  const [updateFranchiseeId, setUpdateFranchiseeId] = useState('');
+  const [updateFirstName, setUpdateFirstName] = useState('');
+  const [updateLastName, setUpdateLastName] = useState('');
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.put(`http://flip2.engr.oregonstate.edu:8299/franchisees/`, {
+        franchisee_id: updateFranchiseeId,
+        first_name: updateFirstName,
+        last_name: updateLastName
+      });
+      window.location.reload()
+    } catch (err) {
+      console.log(err)
+    }
+  };
 
   return (
     <div>
@@ -66,28 +97,28 @@ const Franchisees = () => {
 
       {/* Adding a Franchisee form */}
       <div>
-	  	<form method="POST" id="addFranchisee">
+	  	<form id="addFranchisee">
 			<legend><strong>Add Franchisee</strong></legend>
 			<fieldset class="fields">
-				<label> first name </label> <input type="text" name="firstName"></input>
-				<label> last name </label> <input type="text" name="lastName"></input>
+				<label> First Name </label> <input type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}></input>
+				<label> Last Name </label> <input type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}></input>
 			</fieldset>
-			<input class="btn" type="submit" id="addFranchisee" value="Add Franchisee"></input>
+			<input class="btn" type="submit" id="addFranchisee" value="Add Franchisee" onClick={(handleAdd)}></input>
 		</form>
       </div>
       
       <br></br>
 
       {/* Editing a Franchisee form */}
-	  <form method="PUT" id="UpdateFranchisee">
+	  <form id="UpdateFranchisee">
 				<legend><strong>Update Franchisee</strong></legend>
 				<fieldset class="fields">
 					<input type="hidden"></input>
-					<label> ID: </label> <DropdownComponent ids={franchisees.map(({ franchisee_id }) => franchisee_id)} />
-					<label> first name </label> <input type="text" name="firstName" value="Bob"></input>
-					<label> last name </label> <input type="text" name="lastName" value="Gumbo"></input>
+					<label> Franchisee ID: </label> <DropdownComponent ids={franchisees.map(({ franchisee_id }) => franchisee_id)} onSelect={setUpdateFranchiseeId}/>
+					<label> First Name </label> <input type="text" name="firstName" value="Bob" onChange={(e) => setUpdateFirstName(e.target.value)}></input>
+					<label> Last Name </label> <input type="text" name="lastName" value="Gumbo" onChange={(e) => setUpdateLastName(e.target.value)}></input>
 				</fieldset>
-					<input class="btn" type="submit" id="UpdateSaveFranchisee" value="Save Update Franchisee"></input>
+					<input class="btn" type="submit" id="UpdateSaveFranchisee" value="Save Update Franchisee" onClick={(handleUpdate)}></input>
 			</form> 
       
       <br></br>
