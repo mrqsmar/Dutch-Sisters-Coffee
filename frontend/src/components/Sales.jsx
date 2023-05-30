@@ -29,15 +29,52 @@ const Sales = () => {
     }
   };
 
-  // const handleAdd = async (id) => {
-  //   try {
-  //     await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes/`);
-  //     window.location.reload()
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
+  const [saleAmount, setSaleAmount] = useState('');
+  const [saleDate, setSaleDate] = useState('');
+  const [saleItemId, setSaleItemId] = useState('');
+  const [cafeId, setCafeId] = useState('');
+
+  const handleAdd = async (e) => {
+    e.preventDefault()
+
+    try {
+      await axios.post(`http://flip2.engr.oregonstate.edu:8299/sales`, {
+        sale_amount: saleAmount,
+        sale_date: saleDate,
+        sale_item_id: saleItemId,
+        cafe_id: cafeId
+      });
+      window.location.reload()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const [updateSaleId, setUpdateSaleId] = useState('');
+  const [updateSaleAmount, setUpdateSaleAmount] = useState('');
+  const [updateSaleDate, setUpdateSaleDate] = useState('');
+  const [updateSaleItemId, setUpdateSaleItemId] = useState('');
+  const [updateCafeId, setUpdateCafeId] = useState('');
+
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+
+    try {
+      await axios.put(`http://flip2.engr.oregonstate.edu:8299/sales`, {
+        sale_id: updateSaleId,
+        sale_amount: updateSaleAmount,
+        sale_date: updateSaleDate,
+        sale_item_id: updateSaleItemId,
+        cafe_id: updateCafeId
+      });
+      window.location.reload()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  
   return (
     <div>
       <h1>Sales</h1>
@@ -69,39 +106,38 @@ const Sales = () => {
 
       {/* Adding a new Sale form */}
       <div>
-        <form method="POST" id="addSale">
+        <form id="addSale">
         	<legend><strong>Add Sale</strong></legend>
 			<fieldset class="fields">
-				<label> sale amount </label> <input type="text" name="saleAmount"></input>
+				<label> Sale Amount </label> <input type="text" name="saleAmount" onChange={(e) => setSaleAmount(e.target.value)}></input>
 				
         {/* Should be a date input */}
-				<label> sale date </label> <input type="text" name="saleDate"></input> 
+				<label> Sale Date </label> <input type="text" name="saleDate" onChange={(e) => setSaleDate(e.target.value)}></input> 
 
 				{/* Should be a dropdown of all items available, since this is a fk */}
-				<label> sale item sold </label> <input type="text" name="itemSold"></input> 
-				
+				<label> Sale Item Sold </label> <DropdownComponent ids={inventoryOrders.map(({ sale_item_id }) => sale_item_id)} onSelect={setSaleItemId}/>
 				{/* Should be a dropdown of all cafes available, since this is a fk */}
-				<label> cafe id </label> <input type="text" name="cafeId"></input> 
+				<label> Cafe ID </label> <DropdownComponent ids={inventoryOrders.map(({ cafe_id }) => cafe_id)} onSelect={setCafeId}/>
 		
 			</fieldset>
-			<input class="btn" type="submit" id="addSale" value="Add Sale"></input>
+			<input class="btn" type="submit" id="addSale" value="Add Sale" onClick={handleAdd}></input>
 		</form>
       </div>
       
       <br></br>
 
-      {/* Editing a Due Owed form */}
-      <form method="PUT" id="UpdateSales">
+      {/* Editing a Sale form */}
+      <form id="UpdateSales">
 				<legend><strong>Update Sale</strong></legend>
 				<fieldset class="fields">
 					<input type="hidden"></input>
-					<label> ID: </label> <DropdownComponent ids={sales.map(({ sale_id }) => sale_id)} />
-					<label> sale amount </label> <input type="text" name="saleAmount" value='temp'></input>
-					<label> sale date </label> <input type="text" name="saleDate" value='temp'></input>
-          <label> sale item sold </label> <input type="text" name="itemSold" value='temp'></input>
-					<label> cafe id </label> <input type="text" name="cafeId" value='temp'></input>
+					<label> Sale ID: </label> <DropdownComponent ids={sales.map(({ sale_id }) => sale_id)} onSelect={setUpdateSaleId}/>
+					<label> Sale Amount </label> <input type="text" name="saleAmount" onChange={(e) => setUpdateSaleAmount(e.target.value)}></input>
+					<label> Sale Date </label> <input type="text" name="saleDate" onChange={(e) => setUpdateSaleDate(e.target.value)}></input>
+          <label> Sale Item Sold </label> <input type="text" name="itemSold" onChange={(e) => setUpdateSaleItemId(e.target.value)}></input>
+					<label> Cafe ID </label> <DropdownComponent ids={inventoryOrders.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
 				</fieldset>
-					<input class="btn" type="submit" id="UpdateSaveSales" value="Save Update Sale"></input>
+					<input class="btn" type="submit" id="UpdateSaveSales" value="Save Update Sale" onClick={handleUpdate}></input>
 			</form> 
       
       <br></br>
