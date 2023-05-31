@@ -123,9 +123,9 @@ const InventoryItems = () => {
 				<fieldset class="fields">
 					<input type="hidden"></input>
 					<label> Item ID: </label> <DropdownComponent ids={inventoryItems.map(({ item_id }) => item_id)} onSelect={setUpdateInventoryItemsId}/>
-					<label> Item Name </label> <input type="text" name="itemName" value="temp" onChange={(e) => setUpdateItemName(e.target.value)}></input>
-					<label> Item Price </label> <input type="text" name="itemPrice" value="temp" onChange={(e) => setUpdateItemPrice(e.target.value)}></input>
-					<label> Remaining Stock </label> <input type="text" name="remainingStock" value="temp" onChange={(e) => setUpdateRemainingStock(e.target.value)}></input>
+					<label> Item Name </label> <input type="text" name="itemName" onChange={(e) => setUpdateItemName(e.target.value)}></input>
+					<label> Item Price </label> <input type="text" name="itemPrice" onChange={(e) => setUpdateItemPrice(e.target.value)}></input>
+					<label> Remaining Stock </label> <input type="text" name="remainingStock" onChange={(e) => setUpdateRemainingStock(e.target.value)}></input>
 				</fieldset>
 					<input class="btn" type="submit" id="UpdateInventoryItem" value="Save Update Inventory Item" onClick={(handleUpdate)}></input>
 			</form> 
