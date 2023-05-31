@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import DropdownComponent from './DropdownMenuField'
 
 const Sales = () => {
@@ -115,9 +114,9 @@ const Sales = () => {
 				<label> Sale Date </label> <input type="text" name="saleDate" onChange={(e) => setSaleDate(e.target.value)}></input> 
 
 				{/* Should be a dropdown of all items available, since this is a fk */}
-				<label> Sale Item Sold </label> <DropdownComponent ids={inventoryOrders.map(({ sale_item_id }) => sale_item_id)} onSelect={setSaleItemId}/>
+				<label> Sale Item Sold </label> <DropdownComponent ids={sales.map(({ sale_item_id }) => sale_item_id)} onSelect={setSaleItemId}/>
 				{/* Should be a dropdown of all cafes available, since this is a fk */}
-				<label> Cafe ID </label> <DropdownComponent ids={inventoryOrders.map(({ cafe_id }) => cafe_id)} onSelect={setCafeId}/>
+				<label> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setCafeId}/>
 		
 			</fieldset>
 			<input class="btn" type="submit" id="addSale" value="Add Sale" onClick={handleAdd}></input>
@@ -135,7 +134,7 @@ const Sales = () => {
 					<label> Sale Amount </label> <input type="text" name="saleAmount" onChange={(e) => setUpdateSaleAmount(e.target.value)}></input>
 					<label> Sale Date </label> <input type="text" name="saleDate" onChange={(e) => setUpdateSaleDate(e.target.value)}></input>
           <label> Sale Item Sold </label> <input type="text" name="itemSold" onChange={(e) => setUpdateSaleItemId(e.target.value)}></input>
-					<label> Cafe ID </label> <DropdownComponent ids={inventoryOrders.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
+					<label> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
 				</fieldset>
 					<input class="btn" type="submit" id="UpdateSaveSales" value="Save Update Sale" onClick={handleUpdate}></input>
 			</form> 
