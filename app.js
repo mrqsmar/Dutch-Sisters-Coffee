@@ -238,6 +238,7 @@ app.put('/dues_owed', function(req,res,next){
 // Sales table routes //
 ////////////////////////
 
+// Get all sales
 app.get("/sales", (req, res) => {
 	const q = "SELECT * FROM Sales";
 	db.pool.query(q, (err, data) => {
@@ -248,6 +249,69 @@ app.get("/sales", (req, res) => {
 		return res.json(data);
 	});
 });
+
+// Delete a sale
+app.delete("/sales/:id", (req, res) => {
+	const saleId = req.params.id;
+	
+	const q = "DELETE FROM Sales WHERE sale_id=" + saleId + ";";
+	console.log("Delete query is: " + q);
+
+	db.pool.query(q, [saleId], (err, data) => {
+		if (err) return res.send(err);
+		return res.json(data);
+	});
+});
+
+// Add a sale
+app.post('/sales', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+	let sale_amount = data.sale_amount;
+	let sale_item_id = data.sale_item_id;
+	let sale_date = data.sale_date;
+	let cafe_id = data.cafe_id;
+
+	if (cafe_id == '') {
+		cafe_id = "NULL"
+	}
+
+    // Create the query and run it on the database
+    q = `INSERT INTO Sales (sale_amount, sale_item_id, sale_date, cafe_id) VALUES (${sale_amount}, ${sale_item_id}, '${sale_date}', ${cafe_id});`;
+	console.log("Add query is: " + q);
+
+    db.pool.query(q, function(err){
+		if (err) return res.send(err);
+		return res.json(data);
+    })
+});
+
+// Update a sale
+app.put('/sales', function(req,res,next){
+	let data = req.body;
+
+	let sale_amount = data.sale_amount;
+	let sale_date = data.sale_date;
+	let sale_item_id = data.sale_item_id;
+	let cafe_id = data.cafe_id;
+	let sale_id = data.sale_id;
+
+	if (cafe_id == '') {
+		cafe_id = "NULL"
+	}
+
+	let q = `UPDATE Sales SET sale_amount = ${sale_amount}, sale_item_id = ${sale_item_id}, sale_date = '${sale_date}', cafe_id = ${cafe_id} WHERE sale_id = ${sale_id};`
+	console.log("Update query is: " + q);
+
+	// Run the query
+	db.pool.query(q, function(err){
+		if (err) return res.send(err);
+		return res.json(data);	
+  	})
+});
+
 
 /////////////////////////////
 // Sale Items table routes //
