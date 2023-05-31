@@ -29,14 +29,50 @@ const InventoryItems = () => {
     }
   };
 
-  // const handleAdd = async (id) => {
-  //   try {
-  //     await axios.put(`http://flip2.engr.oregonstate.edu:8299/sale_items/`);
-  //     window.location.reload()
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  // Adding 3 elements to the form
+  const [itemName, setItemName] = useState('');
+  const [itemPrice, setItemPrice] = useState('');
+  const [remainingStock, setRemainingStock] = useState('');
+
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.put(`http://flip2.engr.oregonstate.edu:8299/inventory_items/`, {
+        item_name: itemName,
+        item_price: itemPrice,
+        remaining_stock: remainingStock
+      });
+       window.location.reload()
+     } catch (err) {
+       console.log(err);
+     }
+   };
+
+  
+  const [updateInventoryItemsId, setUpdateInventoryItemsId] = useState('')
+  const [updateItemName, setUpdateItemName] = useState('');
+  const [updateItemPrice, setUpdateItemPrice] = useState('');
+  const [updateRemainingStock, setUpdateRemainingStock] = useState('');
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(`http://flip2.engr.oregonstate.edu:8299/inventory_items/`, {
+        item_id: updateInventoryItemsId,
+        item_name: updateItemName,
+        item_price: updateItemPrice,
+        remaining_stock: updateRemainingStock
+      });
+      window.location.reload()
+    } catch (err) {
+     console.log(err);
+    }
+  };
+
+  
 
   return (
     <div>
@@ -68,30 +104,30 @@ const InventoryItems = () => {
 
       {/* Adding a Inventory Item form */}
       <div>
-        <form method="POST" id="addInventoryItem">
+        <form id="addInventoryItem">
           <legend><strong>Add Inventory Item</strong></legend>
           <fieldset class="fields">
-            <label> item name </label> <input type="text" name="itemName"></input>
-            <label> item price </label> <input type="text" name="itemPrice"></input>
-			<label> remaining stock </label> <input type="text" name="remainingStock"></input>
+            <label> Item Name </label> <input type="text" name="itemName" onChange={(e) => setItemName(e.target.value)}></input>
+            <label> Item Price </label> <input type="text" name="itemPrice" onChange={(e) => setItemPrice(e.target.value)}></input>
+			<label> Remaining Stock </label> <input type="text" name="remainingStock" onChange={(e) => setRemainingStock(e.target.value)}></input>
           </fieldset>
-          <input class="btn" type="submit" id="addInventoryItem" value="Add Inventory Item"></input>
+          <input class="btn" type="submit" id="addInventoryItem" value="Add Inventory Item" onClick={(handleAdd)}></input>
         </form>
       </div>
       
       <br></br>
 
       {/* Editing a Inventory Item form */}
-      <form method="PUT" id="UpdateInventoryItem">
+      <form id="UpdateInventoryItem">
 				<legend><strong>Update Inventory Item</strong></legend>
 				<fieldset class="fields">
 					<input type="hidden"></input>
-					<label> ID: </label> <DropdownComponent ids={inventoryItems.map(({ item_id }) => item_id)} />
-					<label> item name </label> <input type="text" name="itemName" value="temp"></input>
-					<label> item price </label> <input type="text" name="itemPrice" value="temp"></input>
-					<label> remaining stock </label> <input type="text" name="remainingStock" value="temp"></input>
+					<label> Item ID: </label> <DropdownComponent ids={inventoryItems.map(({ item_id }) => item_id)} onSelect={setUpdateInventoryItemsId}/>
+					<label> Item Name </label> <input type="text" name="itemName" value="temp" onChange={(e) => setUpdateItemName(e.target.value)}></input>
+					<label> Item Price </label> <input type="text" name="itemPrice" value="temp" onChange={(e) => setUpdateItemPrice(e.target.value)}></input>
+					<label> Remaining Stock </label> <input type="text" name="remainingStock" value="temp" onChange={(e) => setUpdateRemainingStock(e.target.value)}></input>
 				</fieldset>
-					<input class="btn" type="submit" id="UpdateInventoryItem" value="Save Update Inventory Item"></input>
+					<input class="btn" type="submit" id="UpdateInventoryItem" value="Save Update Inventory Item" onClick={(handleUpdate)}></input>
 			</form> 
       
       <br></br>
