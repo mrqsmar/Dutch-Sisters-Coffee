@@ -39,7 +39,7 @@ const InventoryItems = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://flip2.engr.oregonstate.edu:8299/inventory_items/`, {
+      await axios.post(`http://flip2.engr.oregonstate.edu:8299/inventory_items/`, {
         item_name: itemName,
         item_price: itemPrice,
         remaining_stock: remainingStock
@@ -60,7 +60,7 @@ const InventoryItems = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`http://flip2.engr.oregonstate.edu:8299/inventory_items/`, {
+      await axios.put(`http://flip2.engr.oregonstate.edu:8299/inventory_items/`, {
         item_id: updateInventoryItemsId,
         item_name: updateItemName,
         item_price: updateItemPrice,
