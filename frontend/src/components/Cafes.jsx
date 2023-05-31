@@ -69,7 +69,7 @@ const Cafes = () => {
       e.preventDefault();
   
       try {
-        await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes_franchisees/`, {
+        await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes/`, {
         cafe_id: updateCafeId,
         street_address: updateStreetAddress,
         street_name: updateStreetName,
@@ -135,19 +135,19 @@ const Cafes = () => {
       </div>
       
       <br></br>
-
+        
       {/* Editing a Cafe form */}
-      <form method="PUT" id="UpdateCafe">
+      <form id="UpdateCafe">
 				<legend><strong>Update Cafe</strong></legend>
 				<fieldset class="fields">
 					<input type="hidden"></input>
 					<label> Cafe ID: </label> <DropdownComponent ids={cafes.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}  />
-					<label> Street Address </label> <input type="text" name="streetAddress" value="123" onChange={(e) => setUpdateStreetAddress(e.target.value)}></input>
-					<label> Street Name </label> <input type="text" name="streetName" value="Santa Claus Lane" onChange={(e) => setUpdateStreetName(e.target.value)}></input>
-					<label> City </label> <input type="text" name="city" value="North Pole" onChange={(e) => setUpdateCity(e.target.value)}></input>
-					<label> State </label> <input type="text" name="state" value="AK" onChange={(e) => setUpdateState(e.target.value)}></input>
-					<label> Country </label> <input type="text" name="country" value="USA" onChange={(e) => setUpdateCountry(e.target.value)}></input>
-					<label> Zip Code </label> <input type="text" name="zipCode" value="99999" onChange={(e) => setUpdateZipCode(e.target.value)}></input>
+					<label> Street Address </label> <input type="text" name="streetAddress" onChange={(e) => setUpdateStreetAddress(e.target.value)}></input>
+					<label> Street Name </label> <input type="text" name="streetName" onChange={(e) => setUpdateStreetName(e.target.value)}></input>
+					<label> City </label> <input type="text" name="city" onChange={(e) => setUpdateCity(e.target.value)}></input>
+					<label> State </label> <input type="text" name="state" onChange={(e) => setUpdateState(e.target.value)}></input>
+					<label> Country </label> <input type="text" name="country" onChange={(e) => setUpdateCountry(e.target.value)}></input>
+					<label> Zip Code </label> <input type="text" name="zipCode" onChange={(e) => setUpdateZipCode(e.target.value)}></input>
 				</fieldset>
 					<input class="btn" type="submit" id="UpdateSaveCafe" value="Save Update Cafe" onClick={(handleUpdate)}></input>
 			</form> 

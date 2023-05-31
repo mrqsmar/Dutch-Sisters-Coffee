@@ -61,12 +61,12 @@ const DuesOwed = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes_franchisees/`, {
+      await axios.put(`http://flip2.engr.oregonstate.edu:8299/dues_owed/`, {
         dues_invoice_id: updateDuesInvoiceId,
         franchisee_id: updateFranchiseeId,
         amount_due: updateAmountDue,
         due_date: updateDueDate,
-        late_fee: updateLateFees
+        late_fees: updateLateFees
       });
       window.location.reload()
     } catch (err) {
@@ -107,7 +107,7 @@ const DuesOwed = () => {
 
       {/* Adding a new Due Owed form */}
       <div>
-        <form method="POST" id="addDueOwed">
+        <form id="addDueOwed">
         	<legend><strong>Add Dues Owed</strong></legend>
 			<fieldset class="fields">
         <label> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setFranchiseeId}/>
@@ -122,15 +122,15 @@ const DuesOwed = () => {
       <br></br>
 
       {/* Editing a Due Owed form */}
-      <form method="PUT" id="UpdateDuesOwed">
+      <form id="UpdateDuesOwed">
 				<legend><strong>Update Due Owed</strong></legend>
 				<fieldset class="fields">
 					<input type="hidden"></input>
 					<label> Dues Owed ID: </label> <DropdownComponent ids={duesOwed.map(({ dues_invoice_id }) => dues_invoice_id)} onSelect={setUpdateDuesInvoiceId}/>
           <label> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setUpdateFranchiseeId}/>
-					<label> Amount Due </label> <input type="text" name="amountDue" value='temp' onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
-					<label> Due Date </label> <input type="text" name="dueDate" value='temp' onChange={(e) => setUpdateDueDate(e.target.value)}></input>
-					<label> Late Fees </label> <input type="text" name="lateFees" value='temp' onChange={(e) => setUpdateLateFees(e.target.value)}></input>
+					<label> Amount Due </label> <input type="text" name="amountDue" onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
+					<label> Due Date </label> <input type="text" name="dueDate" onChange={(e) => setUpdateDueDate(e.target.value)}></input>
+					<label> Late Fees </label> <input type="text" name="lateFees" onChange={(e) => setUpdateLateFees(e.target.value)}></input>
 				</fieldset>
 					<input class="btn" type="submit" id="UpdateSaveDuesOwed" value="Save Update Dues Owed" onClick={(handleUpdate)}></input>
 			</form> 
