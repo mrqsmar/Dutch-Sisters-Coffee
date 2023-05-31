@@ -100,6 +100,7 @@ app.put('/cafes', function(req,res,next){
 // Franchisees table routes //
 //////////////////////////////
 
+// Get all franchisees
 app.get("/franchisees", (req, res) => {
 	const q = "SELECT * FROM Franchisees";
 	db.pool.query(q, (err, data) => {
@@ -109,6 +110,56 @@ app.get("/franchisees", (req, res) => {
 		}
 		return res.json(data);
 	});
+});
+
+// Delete a franchisee
+app.delete("/franchisees/:id", (req, res) => {
+	const franchiseeId = req.params.id;
+	
+	const q = "DELETE FROM Franchisees WHERE franchisee_id=" + franchiseeId + ";";
+	console.log("Delete query is: " + q);
+
+	db.pool.query(q, [franchiseeId], (err, data) => {
+		if (err) return res.send(err);
+		return res.json(data);
+	});
+});
+
+// Add a franchisee
+app.post('/franchisees', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+	let first_name = data.first_name;
+	let last_name = data.last_name;
+
+    // Create the query and run it on the database
+    q = `INSERT INTO Franchisees (first_name, last_name) VALUES ('${first_name}', '${last_name}');`;
+	console.log("Add query is: " + q);
+
+    db.pool.query(q, function(err){
+		if (err) return res.send(err);
+		return res.json(data);
+    })
+});
+
+// Update a franchisee
+app.put('/franchisees', function(req,res,next){
+	let data = req.body;
+
+	let first_name = data.first_name;
+	let last_name = data.last_name;
+	let franchisee_id = data.franchisee_id;
+
+	let q = `UPDATE Franchisees SET first_name = "${first_name}", last_name = "${last_name}" WHERE franchisee_id = ${franchisee_id};`
+	console.log("Update query is: " + q);
+
+	// Run the query
+	db.pool.query(q, function(err){
+		if (err) return res.send(err);
+		return res.json(data);	
+  	})
 });
 
 
