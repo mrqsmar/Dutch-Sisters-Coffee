@@ -115,8 +115,8 @@ const Franchisees = () => {
 				<fieldset class="fields">
 					<input type="hidden"></input>
 					<label> Franchisee ID: </label> <DropdownComponent ids={franchisees.map(({ franchisee_id }) => franchisee_id)} onSelect={setUpdateFranchiseeId}/>
-					<label> First Name </label> <input type="text" name="firstName" value="Bob" onChange={(e) => setUpdateFirstName(e.target.value)}></input>
-					<label> Last Name </label> <input type="text" name="lastName" value="Gumbo" onChange={(e) => setUpdateLastName(e.target.value)}></input>
+					<label> First Name </label> <input type="text" name="firstName" onChange={(e) => setUpdateFirstName(e.target.value)}></input>
+					<label> Last Name </label> <input type="text" name="lastName" onChange={(e) => setUpdateLastName(e.target.value)}></input>
 				</fieldset>
 					<input class="btn" type="submit" id="UpdateSaveFranchisee" value="Save Update Franchisee" onClick={(handleUpdate)}></input>
 			</form> 
