@@ -92,13 +92,13 @@ const Cafes = () => {
           <tr>
             <th><a href="#" onClick="newCafe()">New</a></th>
             <th></th>
-            <th>id</th>
-            <th>street_address</th>
-            <th>street_name</th>
-            <th>city</th>
-            <th>state</th>
-            <th>country</th>
-            <th>zip_code</th>
+            <th>ID</th>
+            <th>Street Address</th>
+            <th>Street Name</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Zip Code</th>
           </tr>
 
 
