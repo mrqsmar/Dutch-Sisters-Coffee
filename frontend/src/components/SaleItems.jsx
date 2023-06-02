@@ -69,14 +69,15 @@ const SaleItems = () => {
   return (
     <div>
       <h1>Sale Items</h1>
+      <h2>Browse, Add, Update or Delete Sale Items</h2>
       <div className="saleItems">
         <table border="1" cellpadding="5">
           <tr>
             <th><a href="#" onClick="newSaleItem()">New</a></th>
             <th></th>
-            <th>id</th>
-            <th>item_name</th>
-            <th>item_price</th>
+            <th>ID</th>
+            <th>Item Name</th>
+            <th>item Price</th>
           </tr>
 
 

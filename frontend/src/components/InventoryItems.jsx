@@ -77,15 +77,16 @@ const InventoryItems = () => {
   return (
     <div>
       <h1>Inventory Items</h1>
+      <h2>Browse, Add, Update or Delete Inventory Items</h2>
       <div className="inventoryItems">
         <table border="1" cellpadding="5">
           <tr>
             <th><a href="#" onClick="newInventoryItem()">New</a></th>
             <th></th>
-            <th>id</th>
-            <th>item_name</th>
-            <th>item_price</th>
-			<th>remaining_stock</th>
+            <th>ID</th>
+            <th>Item Name</th>
+            <th>Item Price</th>
+			      <th>Remaining Stock</th>
           </tr>
 
 
@@ -96,7 +97,7 @@ const InventoryItems = () => {
                 <td>{inventoryItems.item_id}</td>
                 <td>{inventoryItems.item_name}</td>
                 <td>{inventoryItems.item_price}</td>
-				<td>{inventoryItems.remaining_stock}</td>
+				        <td>{inventoryItems.remaining_stock}</td>
               </tr>
         ))}
         </table>
@@ -109,7 +110,7 @@ const InventoryItems = () => {
           <fieldset class="fields">
             <label> Item Name </label> <input type="text" name="itemName" onChange={(e) => setItemName(e.target.value)}></input>
             <label> Item Price </label> <input type="text" name="itemPrice" onChange={(e) => setItemPrice(e.target.value)}></input>
-			<label> Remaining Stock </label> <input type="text" name="remainingStock" onChange={(e) => setRemainingStock(e.target.value)}></input>
+			      <label> Remaining Stock </label> <input type="text" name="remainingStock" onChange={(e) => setRemainingStock(e.target.value)}></input>
           </fieldset>
           <input class="btn" type="submit" id="addInventoryItem" value="Add Inventory Item" onClick={(handleAdd)}></input>
         </form>

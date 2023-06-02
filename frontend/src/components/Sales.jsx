@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import DropdownComponent from './DropdownMenuField'
 
 const Sales = () => {
@@ -77,16 +78,17 @@ const Sales = () => {
   return (
     <div>
       <h1>Sales</h1>
+      <h2>Browse, Add, Update or Delete Sales</h2>
       <div className="sales">
         <table border="1" cellpadding="5">
           <tr>
             <th><a href="#" onClick="newSale()">New</a></th>
             <th></th>
-            <th>id</th>
-            <th>sale_amount</th>
-            <th>sale_date</th>
-            <th>sale_item_id</th>
-            <th>cafe_id</th>
+            <th>ID</th>
+            <th>Sale Amount</th>
+            <th>Sale Date</th>
+            <th>Sale Item ID</th>
+            <th>Cafe ID</th>
           </tr>
 
           {sales.map((sales) => (

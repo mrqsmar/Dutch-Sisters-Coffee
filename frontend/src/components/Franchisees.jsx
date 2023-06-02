@@ -72,14 +72,15 @@ const Franchisees = () => {
   return (
     <div>
       <h1>Franchisees</h1>
+      <h2>Browse, Add, Update or Delete Franchisees</h2>
       <div className="franchisees">
         <table border="1" cellpadding="5">
           <tr>
             <th><a href="#" onClick="newFranchisee()">New</a></th>
             <th></th>
-            <th>id</th>
-            <th>first_name</th>
-            <th>last_name</th>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
           </tr>
 
 
