@@ -74,9 +74,9 @@ const CafesFranchisees = () => {
         <table border="1" cellpadding="5">
           <tr>
             <th></th>
-            <th>id</th>
-            <th>franchisee_id</th>
-            <th>cafe_id</th>
+            <th>ID</th>
+            <th>Cafe ID</th>
+            <th>Franchisee ID</th>
           </tr>
 
           {cafesFranchisees.map((cafesFranchisees) => (
