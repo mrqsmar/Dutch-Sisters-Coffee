@@ -136,7 +136,7 @@ const Sales = () => {
 					<label> Sale Amount </label> <input type="text" name="saleAmount" onChange={(e) => setUpdateSaleAmount(e.target.value)}></input>
 					<label> Sale Date </label> <input type="text" name="saleDate" onChange={(e) => setUpdateSaleDate(e.target.value)}></input>
           <label> Sale Item Sold </label> <input type="text" name="itemSold" onChange={(e) => setUpdateSaleItemId(e.target.value)}></input>
-					<label> Cafe ID </label> <DropdownComponent ids={inventoryOrders.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
+					<label> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
 				</fieldset>
 					<input class="btn" type="submit" id="UpdateSaveSales" value="Save Update Sale" onClick={handleUpdate}></input>
 			</form> 
