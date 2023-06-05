@@ -30,7 +30,6 @@ const Franchisees = () => {
     }
   };
 
-
   // Adding 2 to the add form
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -68,7 +67,6 @@ const Franchisees = () => {
       console.log(err)
     }
   };
-
   return (
     <div>
       <h1>Franchisees</h1>
@@ -76,55 +74,48 @@ const Franchisees = () => {
       <div className="franchisees">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newFranchisee()">New</a></th>
             <th></th>
             <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
           </tr>
-
-
           {franchisees.map((franchisee) => (
-              <tr key={franchisee.franchisee_id}>
-                <td><a href="#" onClick="editFranchisee()">Edit</a></td>
-                <button className="delete" onClick={() => handleDelete(franchisee.franchisee_id)}>Delete</button>
-                <td>{franchisee.franchisee_id}</td>
-                <td>{franchisee.first_name}</td>
-                <td>{franchisee.last_name}</td>
-              </tr>
-        ))}
+            <tr key={franchisee.franchisee_id}>
+              <button className="delete" onClick={() => handleDelete(franchisee.franchisee_id)}>Delete</button>
+              <td>{franchisee.franchisee_id}</td>
+              <td>{franchisee.first_name}</td>
+              <td>{franchisee.last_name}</td>
+            </tr>
+          ))}
         </table>
       </div>
 
       {/* Adding a Franchisee form */}
       <div>
-	  	<form id="addFranchisee">
-			<legend><strong>Add Franchisee</strong></legend>
-			<fieldset class="fields">
-				<label> First Name </label> <input type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}></input>
-				<label> Last Name </label> <input type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}></input>
-			</fieldset>
-			<input class="btn" type="submit" id="addFranchisee" value="Add Franchisee" onClick={(handleAdd)}></input>
-		</form>
+        <form id="addFranchisee">
+          <legend><strong>Add Franchisee</strong></legend>
+          <fieldset class="fields">
+            <label> First Name </label> <input type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}></input>
+            <label> Last Name </label> <input type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}></input>
+          </fieldset>
+          <input class="btn" type="submit" id="addFranchisee" value="Add Franchisee" onClick={(handleAdd)}></input>
+        </form>
       </div>
-      
       <br></br>
 
       {/* Editing a Franchisee form */}
-	  <form id="UpdateFranchisee">
-				<legend><strong>Update Franchisee</strong></legend>
-				<fieldset class="fields">
-					<input type="hidden"></input>
-					<label> Franchisee ID: </label> <DropdownComponent ids={franchisees.map(({ franchisee_id }) => franchisee_id)} onSelect={setUpdateFranchiseeId}/>
-					<label> First Name </label> <input type="text" name="firstName" onChange={(e) => setUpdateFirstName(e.target.value)}></input>
-					<label> Last Name </label> <input type="text" name="lastName" onChange={(e) => setUpdateLastName(e.target.value)}></input>
-				</fieldset>
-					<input class="btn" type="submit" id="UpdateSaveFranchisee" value="Save Update Franchisee" onClick={(handleUpdate)}></input>
-			</form> 
-      
+      <form id="UpdateFranchisee">
+        <legend><strong>Update Franchisee</strong></legend>
+        <fieldset class="fields">
+          <input type="hidden"></input>
+          <label> Franchisee ID: </label> <DropdownComponent ids={franchisees.map(({ franchisee_id }) => franchisee_id)} onSelect={setUpdateFranchiseeId}/>
+          <label> First Name </label> <input type="text" name="firstName" onChange={(e) => setUpdateFirstName(e.target.value)}></input>
+          <label> Last Name </label> <input type="text" name="lastName" onChange={(e) => setUpdateLastName(e.target.value)}></input>
+        </fieldset>
+        <input class="btn" type="submit" id="UpdateSaveFranchisee" value="Save Update Franchisee" onClick={(handleUpdate)}></input>
+      </form> 
       <br></br>
-
-    </div>
+  </div>
   );
 };
 

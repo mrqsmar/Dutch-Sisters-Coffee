@@ -87,10 +87,10 @@ const Cafes = () => {
   return (
     <div>
       <h1>Cafes</h1>
+      <h2>Browse, Add, Update or Delete Cafes</h2>
       <div className="cafes">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newCafe()">New</a></th>
             <th></th>
             <th>ID</th>
             <th>Street Address</th>
@@ -104,7 +104,6 @@ const Cafes = () => {
 
           {cafes.map((cafe) => (
               <tr key={cafe.cafe_id}>
-                <td><a href="#" onClick="editCafe()">Edit</a></td>
                 <button className="delete" onClick={() => handleDelete(cafe.cafe_id)}>Delete</button>
                 <td>{cafe.cafe_id}</td>
                 <td>{cafe.street_address}</td>
@@ -149,7 +148,7 @@ const Cafes = () => {
 					<label> Country </label> <input type="text" name="country" onChange={(e) => setUpdateCountry(e.target.value)}></input>
 					<label> Zip Code </label> <input type="text" name="zipCode" onChange={(e) => setUpdateZipCode(e.target.value)}></input>
 				</fieldset>
-					<input class="btn" type="submit" id="UpdateSaveCafe" value="Save Update Cafe" onClick={(handleUpdate)}></input>
+				<input class="btn" type="submit" id="UpdateSaveCafe" value="Save Update Cafe" onClick={(handleUpdate)}></input>
 			</form> 
       
       <br></br>

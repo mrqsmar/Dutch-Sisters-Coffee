@@ -75,7 +75,6 @@ const InventoryOrders = () => {
       console.log(err);
     }
   };
-  
   return (
     <div>
       <h1>Inventory Orders</h1>
@@ -83,7 +82,6 @@ const InventoryOrders = () => {
       <div className="inventoryOrders">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newInventoryOrder())">New</a></th>
             <th></th>
             <th>ID</th>
             <th>Cafe ID</th>
@@ -93,7 +91,6 @@ const InventoryOrders = () => {
           </tr>
           {inventoryOrders.map((inventoryOrders) => (
               <tr key={inventoryOrders.order_id}>
-                <td><a href="#" onClick="editInventoryItem()">Edit</a></td>
                 <button className="delete" onClick={() => handleDelete(inventoryOrders.order_id)}>Delete</button>
                 <td>{inventoryOrders.order_id}</td>
                 <td>{inventoryOrders.cafe_id}</td>
@@ -111,10 +108,10 @@ const InventoryOrders = () => {
           <legend><strong>Add Inventory Order</strong></legend>
           <fieldset class="fields">
 
-			{/* This should be a drop down of all the cafes, fk */}
+			      {/* This should be a drop down of all the cafes, fk */}
             <label> Cafe ID </label> <DropdownComponent ids={inventoryOrders.map(({ cafe_id }) => cafe_id)} onSelect={setCafeId}/>
 
-			{/* This should be a drop down of all the item ids, fk */}
+			      {/* This should be a drop down of all the item ids, fk */}
             <label> Item Ordered </label> <DropdownComponent ids={inventoryOrders.map(({ item_id }) => item_id)} onSelect={setItemId}/>
 			      <label> Quantity Ordered </label> <input type="text" name="quantityOrdered" onChange={(e) => setQuantityOrdered(e.target.value)}></input>
 			      <label> Amount Due </label> <input type="text" name="amountDue" onChange={(e) => setAmountDue(e.target.value)}></input>
@@ -122,7 +119,6 @@ const InventoryOrders = () => {
           <input class="btn" type="submit" id="addInventoryOrder" value="Add Inventory Order" onClick={(handleAdd)}></input>
         </form>
       </div>
-      
       <br></br>
 
       {/* Editing a Inventory Order form */}
@@ -139,11 +135,9 @@ const InventoryOrders = () => {
 					<label> Quantity Ordered </label> <input type="text" name="quantityOrdered" onChange={(e) => setUpdateQuantityOrdered(e.target.value)}></input>
 			    <label> Amount Due </label> <input type="text" name="amountDue" onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
 				</fieldset>
-					<input class="btn" type="submit" id="UpdateInventoryOrder" value="Save Update Inventory Order" onClick={(handleUpdate)}></input>
+				<input class="btn" type="submit" id="UpdateInventoryOrder" value="Save Update Inventory Order" onClick={(handleUpdate)}></input>
 			</form> 
-      
       <br></br>
-
     </div>
   );
 };

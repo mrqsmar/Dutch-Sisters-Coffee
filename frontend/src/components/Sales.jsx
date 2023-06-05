@@ -73,8 +73,6 @@ const Sales = () => {
       console.log(err);
     }
   };
-
-  
   return (
     <div>
       <h1>Sales</h1>
@@ -82,7 +80,6 @@ const Sales = () => {
       <div className="sales">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newSale()">New</a></th>
             <th></th>
             <th>ID</th>
             <th>Sale Amount</th>
@@ -90,18 +87,16 @@ const Sales = () => {
             <th>Sale Item ID</th>
             <th>Cafe ID</th>
           </tr>
-
           {sales.map((sales) => (
-              <tr key={sales.sale_id}>
-                <td><a href="#" onClick="editSale()">Edit</a></td>
-                <button className="delete" onClick={() => handleDelete(sales.sale_id)}>Delete</button>
-                <td>{sales.sale_id}</td>
-                <td>{sales.sale_amount}</td>
-                <td>{sales.sale_date}</td>
-                <td>{sales.sale_item_id}</td>
-                <td>{sales.cafe_id || "NULL"}</td>
-              </tr>
-        ))}
+            <tr key={sales.sale_id}>
+              <button className="delete" onClick={() => handleDelete(sales.sale_id)}>Delete</button>
+              <td>{sales.sale_id}</td>
+              <td>{sales.sale_amount}</td>
+              <td>{sales.sale_date}</td>
+              <td>{sales.sale_item_id}</td>
+              <td>{sales.cafe_id || "NULL"}</td>
+            </tr>
+          ))}
         </table>
       </div>
 
@@ -109,22 +104,21 @@ const Sales = () => {
       <div>
         <form id="addSale">
         	<legend><strong>Add Sale</strong></legend>
-			<fieldset class="fields">
-				<label> Sale Amount </label> <input type="text" name="saleAmount" onChange={(e) => setSaleAmount(e.target.value)}></input>
-				
-        {/* Should be a date input */}
-				<label> Sale Date </label> <input type="text" name="saleDate" onChange={(e) => setSaleDate(e.target.value)}></input> 
+			    <fieldset class="fields">
+            <label> Sale Amount </label> <input type="text" name="saleAmount" onChange={(e) => setSaleAmount(e.target.value)}></input>
+            
+            {/* Should be a date input */}
+            <label> Sale Date </label> <input type="text" name="saleDate" onChange={(e) => setSaleDate(e.target.value)}></input> 
 
-				{/* Should be a dropdown of all items available, since this is a fk */}
-				<label> Sale Item Sold </label> <DropdownComponent ids={sales.map(({ sale_item_id }) => sale_item_id)} onSelect={setSaleItemId}/>
-				{/* Should be a dropdown of all cafes available, since this is a fk */}
-				<label> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setCafeId}/>
+            {/* Should be a dropdown of all items available, since this is a fk */}
+            <label> Sale Item Sold </label> <DropdownComponent ids={sales.map(({ sale_item_id }) => sale_item_id)} onSelect={setSaleItemId}/>
+            {/* Should be a dropdown of all cafes available, since this is a fk */}
+            <label> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setCafeId}/>
 		
-			</fieldset>
-			<input class="btn" type="submit" id="addSale" value="Add Sale" onClick={handleAdd}></input>
-		</form>
+          </fieldset>
+          <input class="btn" type="submit" id="addSale" value="Add Sale" onClick={handleAdd}></input>
+        </form>
       </div>
-      
       <br></br>
 
       {/* Editing a Sale form */}
@@ -138,11 +132,9 @@ const Sales = () => {
           <label> Sale Item Sold </label> <input type="text" name="itemSold" onChange={(e) => setUpdateSaleItemId(e.target.value)}></input>
 					<label> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
 				</fieldset>
-					<input class="btn" type="submit" id="UpdateSaveSales" value="Save Update Sale" onClick={handleUpdate}></input>
+				<input class="btn" type="submit" id="UpdateSaveSales" value="Save Update Sale" onClick={handleUpdate}></input>
 			</form> 
-      
       <br></br>
-
     </div>
   );
 };

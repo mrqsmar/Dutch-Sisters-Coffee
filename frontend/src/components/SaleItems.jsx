@@ -65,7 +65,6 @@ const SaleItems = () => {
       console.log(err);
     }
   };
-
   return (
     <div>
       <h1>Sale Items</h1>
@@ -73,23 +72,19 @@ const SaleItems = () => {
       <div className="saleItems">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newSaleItem()">New</a></th>
             <th></th>
             <th>ID</th>
             <th>Item Name</th>
             <th>item Price</th>
           </tr>
-
-
           {saleItems.map((saleItems) => (
-              <tr key={saleItems.sale_item_id}>
-                <td><a href="#" onClick="editCafe()">Edit</a></td>
-                <button className="delete" onClick={() => handleDelete(saleItems.sale_item_id)}>Delete</button>
-                <td>{saleItems.sale_item_id}</td>
-                <td>{saleItems.item_name}</td>
-                <td>{saleItems.item_price}</td>
-              </tr>
-        ))}
+            <tr key={saleItems.sale_item_id}>
+              <button className="delete" onClick={() => handleDelete(saleItems.sale_item_id)}>Delete</button>
+              <td>{saleItems.sale_item_id}</td>
+              <td>{saleItems.item_name}</td>
+              <td>{saleItems.item_price}</td>
+            </tr>
+          ))}
         </table>
       </div>
 
@@ -104,7 +99,6 @@ const SaleItems = () => {
           <input class="btn" type="submit" id="addSaleItem" value="Add Sale Item" onClick={(handleAdd)}></input>
         </form>
       </div>
-      
       <br></br>
 
       {/* Editing a Sale Item form */}
@@ -116,11 +110,9 @@ const SaleItems = () => {
 					<label> Item Name </label> <input type="text" name="itemName" onChange={(e) => setUpdateItemName(e.target.value)}></input>
 					<label> Item Price </label> <input type="text" name="itemPrice" onChange={(e) => setUpdateItemPrice(e.target.value)}></input>
 				</fieldset>
-					<input class="btn" type="submit" id="UpdateSaleItem" value="Save Update Sale Item" onClick={(handleUpdate)}></input>
+				<input class="btn" type="submit" id="UpdateSaleItem" value="Save Update Sale Item" onClick={(handleUpdate)}></input>
 			</form> 
-      
       <br></br>
-
     </div>
   );
 };

@@ -70,6 +70,7 @@ const CafesFranchisees = () => {
   return (
     <div>
       <h1>Cafes Franchisees</h1>
+      <h2>Browse, Add, Update or Delete Cafes / Franchisees</h2>
       <div className="cafesFranchisees">
         <table border="1" cellpadding="5">
           <tr>

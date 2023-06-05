@@ -71,9 +71,6 @@ const InventoryItems = () => {
      console.log(err);
     }
   };
-
-  
-
   return (
     <div>
       <h1>Inventory Items</h1>
@@ -81,25 +78,21 @@ const InventoryItems = () => {
       <div className="inventoryItems">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newInventoryItem()">New</a></th>
             <th></th>
             <th>ID</th>
             <th>Item Name</th>
             <th>Item Price</th>
 			      <th>Remaining Stock</th>
           </tr>
-
-
           {inventoryItems.map((inventoryItems) => (
-              <tr key={inventoryItems.item_id}>
-                <td><a href="#" onClick="editInventoryItem()">Edit</a></td>
-                <button className="delete" onClick={() => handleDelete(inventoryItems.item_id)}>Delete</button>
-                <td>{inventoryItems.item_id}</td>
-                <td>{inventoryItems.item_name}</td>
-                <td>{inventoryItems.item_price}</td>
-				        <td>{inventoryItems.remaining_stock}</td>
-              </tr>
-        ))}
+            <tr key={inventoryItems.item_id}>
+              <button className="delete" onClick={() => handleDelete(inventoryItems.item_id)}>Delete</button>
+              <td>{inventoryItems.item_id}</td>
+              <td>{inventoryItems.item_name}</td>
+              <td>{inventoryItems.item_price}</td>
+              <td>{inventoryItems.remaining_stock}</td>
+            </tr>
+          ))}
         </table>
       </div>
 
@@ -115,7 +108,6 @@ const InventoryItems = () => {
           <input class="btn" type="submit" id="addInventoryItem" value="Add Inventory Item" onClick={(handleAdd)}></input>
         </form>
       </div>
-      
       <br></br>
 
       {/* Editing a Inventory Item form */}
@@ -128,11 +120,9 @@ const InventoryItems = () => {
 					<label> Item Price </label> <input type="text" name="itemPrice" onChange={(e) => setUpdateItemPrice(e.target.value)}></input>
 					<label> Remaining Stock </label> <input type="text" name="remainingStock" onChange={(e) => setUpdateRemainingStock(e.target.value)}></input>
 				</fieldset>
-					<input class="btn" type="submit" id="UpdateInventoryItem" value="Save Update Inventory Item" onClick={(handleUpdate)}></input>
+				<input class="btn" type="submit" id="UpdateInventoryItem" value="Save Update Inventory Item" onClick={(handleUpdate)}></input>
 			</form> 
-      
       <br></br>
-
     </div>
   );
 };
