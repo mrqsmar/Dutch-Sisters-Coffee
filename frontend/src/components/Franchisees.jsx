@@ -68,10 +68,10 @@ const Franchisees = () => {
     }
   };
   return (
-    <div>
+    <div className="entity-page">
       <h1>Franchisees</h1>
       <h2>Browse, Add, Update or Delete Franchisees</h2>
-      <div className="franchisees">
+      <div className="table-container">
         <table border="1" cellpadding="5">
           <tr>
             <th></th>

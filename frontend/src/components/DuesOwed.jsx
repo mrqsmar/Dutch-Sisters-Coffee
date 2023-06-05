@@ -74,10 +74,10 @@ const DuesOwed = () => {
     }
   };
   return (
-    <div>
+    <div className="entity-page">
       <h1>Dues Owed</h1>
       <h2>Browse, Add, Update or Delete Dues Owed</h2>
-      <div className="duesOwed">
+      <div className="table-container">
         <table border="1" cellpadding="5">
           <tr>
             <th></th>

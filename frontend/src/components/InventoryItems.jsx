@@ -72,10 +72,10 @@ const InventoryItems = () => {
     }
   };
   return (
-    <div>
+    <div className="entity-page">
       <h1>Inventory Items</h1>
       <h2>Browse, Add, Update or Delete Inventory Items</h2>
-      <div className="inventoryItems">
+      <div className="table-container">
         <table border="1" cellpadding="5">
           <tr>
             <th></th>

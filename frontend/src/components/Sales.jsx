@@ -74,10 +74,10 @@ const Sales = () => {
     }
   };
   return (
-    <div>
+    <div className="entity-page">
       <h1>Sales</h1>
       <h2>Browse, Add, Update or Delete Sales</h2>
-      <div className="sales">
+      <div className="table-container">
         <table border="1" cellpadding="5">
           <tr>
             <th></th>
