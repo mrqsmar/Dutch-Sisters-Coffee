@@ -11,8 +11,6 @@ var app     = express();            // We need to instantiate an express object 
 app.use(cors());
 app.use(express.json());
 
-console.log(process.env)
-
 const PORT = process.env.DB_PORT;
 
 // Database
