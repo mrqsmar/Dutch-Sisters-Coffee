@@ -1,7 +1,7 @@
-const Footer = (props) => { 
+const Footer = () => { 
 	return (
-	  <div>
-		<p>Copyright Dutch Girls' Coffee, 2023</p>
+	  <div className="footer-container">
+		<p>Copyright Dutch Girls Coffee, 2023</p>
 	  </div>
 	)
   }

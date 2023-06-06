@@ -50,7 +50,7 @@ const DuesOwed = () => {
     }
   };
 
-    // update
+  // update
   const [updateDuesInvoiceId, setUpdateDuesInvoiceId] = useState('');
   const [updateFranchiseeId, setUpdateFranchiseeId] = useState('');
   const [updateAmountDue, setUpdateAmountDue] = useState('');
@@ -73,70 +73,64 @@ const DuesOwed = () => {
       console.log(err);
     }
   };
-
-
   return (
-    <div>
+    <div className="entity-page">
       <h1>Dues Owed</h1>
-      <div className="duesOwed">
+      <h2>Browse, Add, Update or Delete Dues Owed</h2>
+      <div className="table-container">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newDuesOwed()">New</a></th>
             <th></th>
-            <th>id</th>
-            <th>franchisee_id</th>
-            <th>amount_due</th>
-            <th>due_date</th>
-            <th>late_fees</th>
+            <th>ID</th>
+            <th>Franchisee ID</th>
+            <th>Amount Due</th>
+            <th>Due Date</th>
+            <th>Late Fees</th>
           </tr>
-
-
           {duesOwed.map((duesOwed) => (
-              <tr key={duesOwed.dues_invoice_id}>
-                <td><a href="#" onClick="editDuesOwed()">Edit</a></td>
-                <button className="delete" onClick={() => handleDelete(duesOwed.dues_invoice_id)}>Delete</button>
-                <td>{duesOwed.dues_invoice_id}</td>
-                <td>{duesOwed.franchisee_id}</td>
-                <td>{duesOwed.amount_due}</td>
-                <td>{duesOwed.due_date}</td>
-                <td>{duesOwed.late_fees}</td>
-              </tr>
-        ))}
+            <tr key={duesOwed.dues_invoice_id}>
+              <button className="delete" onClick={() => handleDelete(duesOwed.dues_invoice_id)}>Delete</button>
+              <td>{duesOwed.dues_invoice_id}</td>
+              <td>{duesOwed.franchisee_id}</td>
+              <td>{duesOwed.amount_due}</td>
+              <td>{duesOwed.due_date}</td>
+              <td>{duesOwed.late_fees}</td>
+            </tr>
+          ))}
         </table>
       </div>
 
       {/* Adding a new Due Owed form */}
-      <div>
+      <div className="form-container">
         <form id="addDueOwed">
         	<legend><strong>Add Dues Owed</strong></legend>
-			<fieldset class="fields">
-        <label> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setFranchiseeId}/>
-				<label> Amount Due </label> <input type="text" name="amountDue" onChange={(e) => setAmountDue(e.target.value)}></input>
-				<label> Due Date </label> <input type="text" name="dueDate" onChange={(e) => setDueDate(e.target.value)}></input>
-				<label> Late Fees </label> <input type="text" name="lateFees" onChange={(e) => setLateFees(e.target.value)}></input>
-			</fieldset>
-			<input class="btn" type="submit" id="addDueOwed" value="Add Due Owed" onClick={(handleAdd)}></input>
-		</form>
-      </div>
-      
+			    <fieldset class="fields">
+            <label className="form-label"> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setFranchiseeId}/>
+            <label className="form-label"> Amount Due </label> <input type="text" name="amountDue" className="form-input" onChange={(e) => setAmountDue(e.target.value)}></input>
+            <label className="form-label"> Due Date </label> <input type="text" name="dueDate" className="form-input" onChange={(e) => setDueDate(e.target.value)}></input>
+            <label className="form-label"> Late Fees </label> <input type="text" name="lateFees" className="form-input" onChange={(e) => setLateFees(e.target.value)}></input>
+          </fieldset>
+			    <input class="form-btn" type="submit" id="addDueOwed" value="Add Due Owed" onClick={(handleAdd)}></input>
+		    </form>
+      </div>      
       <br></br>
 
       {/* Editing a Due Owed form */}
-      <form id="UpdateDuesOwed">
-				<legend><strong>Update Due Owed</strong></legend>
-				<fieldset class="fields">
-					<input type="hidden"></input>
-					<label> Dues Owed ID: </label> <DropdownComponent ids={duesOwed.map(({ dues_invoice_id }) => dues_invoice_id)} onSelect={setUpdateDuesInvoiceId}/>
-          <label> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setUpdateFranchiseeId}/>
-					<label> Amount Due </label> <input type="text" name="amountDue" onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
-					<label> Due Date </label> <input type="text" name="dueDate" onChange={(e) => setUpdateDueDate(e.target.value)}></input>
-					<label> Late Fees </label> <input type="text" name="lateFees" onChange={(e) => setUpdateLateFees(e.target.value)}></input>
-				</fieldset>
-					<input class="btn" type="submit" id="UpdateSaveDuesOwed" value="Save Update Dues Owed" onClick={(handleUpdate)}></input>
-			</form> 
-      
+      <div className="form-container">
+        <form id="UpdateDuesOwed">
+          <legend><strong>Update Due Owed</strong></legend>
+          <fieldset class="fields">
+            <input type="hidden"></input>
+            <label className="form-label"> Dues Owed ID: </label> <DropdownComponent ids={duesOwed.map(({ dues_invoice_id }) => dues_invoice_id)} onSelect={setUpdateDuesInvoiceId}/>
+            <label className="form-label"> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setUpdateFranchiseeId}/>
+            <label className="form-label"> Amount Due </label> <input type="text" name="amountDue" className="form-input" onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
+            <label className="form-label"> Due Date </label> <input type="text" name="dueDate" className="form-input" onChange={(e) => setUpdateDueDate(e.target.value)}></input>
+            <label className="form-label"> Late Fees </label> <input type="text" name="lateFees" className="form-input" onChange={(e) => setUpdateLateFees(e.target.value)}></input>
+          </fieldset>
+          <input class="form-btn" type="submit" id="UpdateSaveDuesOwed" value="Save Update Dues Owed" onClick={(handleUpdate)}></input>
+        </form> 
+      </div>
       <br></br>
-
     </div>
   );
 };

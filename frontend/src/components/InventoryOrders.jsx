@@ -75,15 +75,13 @@ const InventoryOrders = () => {
       console.log(err);
     }
   };
-  
   return (
-    <div>
+    <div className="entity-page">
       <h1>Inventory Orders</h1>
       <h2>Browse, Add, Update or Delete Inventory Orders</h2>
-      <div className="inventoryOrders">
+      <div className="table-container">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newInventoryOrder())">New</a></th>
             <th></th>
             <th>ID</th>
             <th>Cafe ID</th>
@@ -93,7 +91,6 @@ const InventoryOrders = () => {
           </tr>
           {inventoryOrders.map((inventoryOrders) => (
               <tr key={inventoryOrders.order_id}>
-                <td><a href="#" onClick="editInventoryItem()">Edit</a></td>
                 <button className="delete" onClick={() => handleDelete(inventoryOrders.order_id)}>Delete</button>
                 <td>{inventoryOrders.order_id}</td>
                 <td>{inventoryOrders.cafe_id}</td>
@@ -106,44 +103,43 @@ const InventoryOrders = () => {
       </div>
 
       {/* Adding a Inventory Order form */}
-      <div>
+      <div className="form-container">
         <form id="addInventoryOrder">
           <legend><strong>Add Inventory Order</strong></legend>
           <fieldset class="fields">
 
-			{/* This should be a drop down of all the cafes, fk */}
+			      {/* This should be a drop down of all the cafes, fk */}
             <label> Cafe ID </label> <DropdownComponent ids={inventoryOrders.map(({ cafe_id }) => cafe_id)} onSelect={setCafeId}/>
 
-			{/* This should be a drop down of all the item ids, fk */}
-            <label> Item Ordered </label> <DropdownComponent ids={inventoryOrders.map(({ item_id }) => item_id)} onSelect={setItemId}/>
-			      <label> Quantity Ordered </label> <input type="text" name="quantityOrdered" onChange={(e) => setQuantityOrdered(e.target.value)}></input>
-			      <label> Amount Due </label> <input type="text" name="amountDue" onChange={(e) => setAmountDue(e.target.value)}></input>
+			      {/* This should be a drop down of all the item ids, fk */}
+            <label className="form-label"> Item Ordered </label> <DropdownComponent ids={inventoryOrders.map(({ item_id }) => item_id)} onSelect={setItemId}/>
+			      <label className="form-label"> Quantity Ordered </label> <input type="text" name="quantityOrdered" className="form-input" onChange={(e) => setQuantityOrdered(e.target.value)}></input>
+			      <label className="form-label"> Amount Due </label> <input type="text" name="amountDue" className="form-input" onChange={(e) => setAmountDue(e.target.value)}></input>
           </fieldset>
-          <input class="btn" type="submit" id="addInventoryOrder" value="Add Inventory Order" onClick={(handleAdd)}></input>
+          <input class="form-btn" type="submit" id="addInventoryOrder" value="Add Inventory Order" onClick={(handleAdd)}></input>
         </form>
       </div>
-      
       <br></br>
 
       {/* Editing a Inventory Order form */}
-      <form id="UpdateInventoryOrder">
-				<legend><strong>Update Inventory Order</strong></legend>
-				<fieldset class="fields">
-					<input type="hidden"></input>
-					<label> ID: </label> <DropdownComponent ids={inventoryOrders.map(({ order_id }) => order_id)} onSelect={setUpdateOrderId}/>
+      <div className="form-container">
+        <form id="UpdateInventoryOrder">
+          <legend><strong>Update Inventory Order</strong></legend>
+          <fieldset class="fields">
+            <input type="hidden"></input>
+            <label className="form-label"> ID: </label> <DropdownComponent ids={inventoryOrders.map(({ order_id }) => order_id)} onSelect={setUpdateOrderId}/>
 
-					{/* This should be a drop down of all the cafes, fk */}
-					<label> Cafe ID </label> <DropdownComponent ids={inventoryOrders.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
-					{/* This should be a drop down of all the item ids, fk */}
-					<label> Item Ordered </label> <DropdownComponent ids={inventoryOrders.map(({ item_id }) => item_id)} onSelect={setUpdateItemId}/>
-					<label> Quantity Ordered </label> <input type="text" name="quantityOrdered" onChange={(e) => setUpdateQuantityOrdered(e.target.value)}></input>
-			    <label> Amount Due </label> <input type="text" name="amountDue" onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
-				</fieldset>
-					<input class="btn" type="submit" id="UpdateInventoryOrder" value="Save Update Inventory Order" onClick={(handleUpdate)}></input>
-			</form> 
-      
+            {/* This should be a drop down of all the cafes, fk */}
+            <label className="form-label"> Cafe ID </label> <DropdownComponent ids={inventoryOrders.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
+            {/* This should be a drop down of all the item ids, fk */}
+            <label className="form-label"> Item Ordered </label> <DropdownComponent ids={inventoryOrders.map(({ item_id }) => item_id)} onSelect={setUpdateItemId}/>
+            <label className="form-label"> Quantity Ordered </label> <input type="text" name="quantityOrdered" className="form-input" onChange={(e) => setUpdateQuantityOrdered(e.target.value)}></input>
+            <label className="form-label"> Amount Due </label> <input type="text" name="amountDue" className="form-input" onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
+          </fieldset>
+          <input class="form-btn" type="submit" id="UpdateInventoryOrder" value="Save Update Inventory Order" onClick={(handleUpdate)}></input>
+        </form> 
+      </div>
       <br></br>
-
     </div>
   );
 };

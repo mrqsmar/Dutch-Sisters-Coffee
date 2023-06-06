@@ -85,12 +85,12 @@ const Cafes = () => {
     };
 
   return (
-    <div>
+    <div className="entity-page">
       <h1>Cafes</h1>
-      <div className="cafes">
+      <h2>Browse, Add, Update or Delete Cafes</h2>
+      <div className="table-container">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newCafe()">New</a></th>
             <th></th>
             <th>ID</th>
             <th>Street Address</th>
@@ -100,11 +100,8 @@ const Cafes = () => {
             <th>Country</th>
             <th>Zip Code</th>
           </tr>
-
-
           {cafes.map((cafe) => (
               <tr key={cafe.cafe_id}>
-                <td><a href="#" onClick="editCafe()">Edit</a></td>
                 <button className="delete" onClick={() => handleDelete(cafe.cafe_id)}>Delete</button>
                 <td>{cafe.cafe_id}</td>
                 <td>{cafe.street_address}</td>
@@ -119,39 +116,51 @@ const Cafes = () => {
       </div>
 
       {/* Adding a Cafe form */}
-      <div>
+      <div className="form-container">
         <form id="addCafe">
           <legend><strong>Add Cafe</strong></legend>
-          <fieldset class="fields">
-            <label> Street Address </label> <input type="text" name="streetAddress" onChange={(e) => setStreetAddress(e.target.value)}></input>
-            <label> Street Name </label> <input type="text" name="streetName" onChange={(e) => setStreetName(e.target.value)}></input>
-            <label> City </label> <input type="text" name="city" onChange={(e) => setCity(e.target.value)}></input>
-            <label> State </label> <input type="text" name="state" onChange={(e) => setState(e.target.value)}></input>
-            <label> Country </label> <input type="text" name="country" onChange={(e) => setCountry(e.target.value)}></input>
-            <label> Zip Code </label> <input type="text" name="zipCode" onChange={(e) => setZipCode(e.target.value)}></input>
+          <fieldset className="fields">
+            <label className="form-label"> Street Address </label>
+            <input type="text" name="streetAddress" className="form-input" onChange={(e) => setStreetAddress(e.target.value)} />
+            
+            <label className="form-label"> Street Name </label>
+            <input type="text" name="streetName" className="form-input" onChange={(e) => setStreetName(e.target.value)} />
+            
+            <label className="form-label"> City </label>
+            <input type="text" name="city" className="form-input" onChange={(e) => setCity(e.target.value)} />
+            
+            <label className="form-label"> State </label>
+            <input type="text" name="state" className="form-input" onChange={(e) => setState(e.target.value)} />
+            
+            <label className="form-label"> Country </label>
+            <input type="text" name="country" className="form-input" onChange={(e) => setCountry(e.target.value)} />
+            
+            <label className="form-label"> Zip Code </label>
+            <input type="text" name="zipCode" className="form-input" onChange={(e) => setZipCode(e.target.value)} />
           </fieldset>
-          <input class="btn" type="submit" id="addCafe" value="Add Cafe" onClick={(handleAdd)}></input>
+          <input className="form-btn" type="submit" id="addCafe" value="Add Cafe" onClick={handleAdd} />
         </form>
       </div>
       
       <br></br>
         
       {/* Editing a Cafe form */}
-      <form id="UpdateCafe">
-				<legend><strong>Update Cafe</strong></legend>
-				<fieldset class="fields">
-					<input type="hidden"></input>
-					<label> Cafe ID: </label> <DropdownComponent ids={cafes.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}  />
-					<label> Street Address </label> <input type="text" name="streetAddress" onChange={(e) => setUpdateStreetAddress(e.target.value)}></input>
-					<label> Street Name </label> <input type="text" name="streetName" onChange={(e) => setUpdateStreetName(e.target.value)}></input>
-					<label> City </label> <input type="text" name="city" onChange={(e) => setUpdateCity(e.target.value)}></input>
-					<label> State </label> <input type="text" name="state" onChange={(e) => setUpdateState(e.target.value)}></input>
-					<label> Country </label> <input type="text" name="country" onChange={(e) => setUpdateCountry(e.target.value)}></input>
-					<label> Zip Code </label> <input type="text" name="zipCode" onChange={(e) => setUpdateZipCode(e.target.value)}></input>
-				</fieldset>
-					<input class="btn" type="submit" id="UpdateSaveCafe" value="Save Update Cafe" onClick={(handleUpdate)}></input>
-			</form> 
-      
+      <div className="form-container">
+        <form id="UpdateCafe">
+          <legend><strong>Update Cafe</strong></legend>
+          <fieldset class="fields">
+            <input type="hidden"></input>
+            <label className="form-label"> Cafe ID: </label> <DropdownComponent ids={cafes.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}  />
+            <label className="form-label"> Street Address </label> <input type="text" name="streetAddress" className="form-input" onChange={(e) => setUpdateStreetAddress(e.target.value)}></input>
+            <label className="form-label"> Street Name </label> <input type="text" name="streetName" className="form-input" onChange={(e) => setUpdateStreetName(e.target.value)}></input>
+            <label className="form-label"> City </label> <input type="text" name="city" className="form-input" onChange={(e) => setUpdateCity(e.target.value)}></input>
+            <label className="form-label"> State </label> <input type="text" name="state" className="form-input" onChange={(e) => setUpdateState(e.target.value)}></input>
+            <label className="form-label"> Country </label> <input type="text" name="country" className="form-input" onChange={(e) => setUpdateCountry(e.target.value)}></input>
+            <label className="form-label"> Zip Code </label> <input type="text" name="zipCode" className="form-input" onChange={(e) => setUpdateZipCode(e.target.value)}></input>
+          </fieldset>
+          <input class="form-btn" type="submit" id="UpdateSaveCafe" value="Save Update Cafe" onClick={(handleUpdate)}></input>
+        </form> 
+      </div>
       <br></br>
 
     </div>

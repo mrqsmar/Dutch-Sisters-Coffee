@@ -36,3 +36,94 @@
     transform: rotate(360deg);
   }
 }
+
+/***********************/
+/* Non stock CSS below */
+/***********************/
+
+.header-container {
+  background-color: rgb(150,200,255);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+}
+
+.footer-container {
+  background-color: rgb(150,200,255);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #ccc;
+}
+
+.button-header {
+  background-color: rgb(0, 95, 152);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-header:hover {
+  background-color: white;
+  color: rgb(0, 95, 152);
+}
+
+.entity-page {
+  margin-top: 120px;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+}
+
+.table {
+  width: 100%;
+}
+
+.thead {
+
+}
+
+.td {
+
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.form-btn {
+  width: 99%;
+  margin: 5px auto;
+}
+
+.select-field {
+  margin-bottom: 7px;
+}

@@ -71,68 +71,60 @@ const InventoryItems = () => {
      console.log(err);
     }
   };
-
-  
-
   return (
-    <div>
+    <div className="entity-page">
       <h1>Inventory Items</h1>
       <h2>Browse, Add, Update or Delete Inventory Items</h2>
-      <div className="inventoryItems">
+      <div className="table-container">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newInventoryItem()">New</a></th>
             <th></th>
             <th>ID</th>
             <th>Item Name</th>
             <th>Item Price</th>
 			      <th>Remaining Stock</th>
           </tr>
-
-
           {inventoryItems.map((inventoryItems) => (
-              <tr key={inventoryItems.item_id}>
-                <td><a href="#" onClick="editInventoryItem()">Edit</a></td>
-                <button className="delete" onClick={() => handleDelete(inventoryItems.item_id)}>Delete</button>
-                <td>{inventoryItems.item_id}</td>
-                <td>{inventoryItems.item_name}</td>
-                <td>{inventoryItems.item_price}</td>
-				        <td>{inventoryItems.remaining_stock}</td>
-              </tr>
-        ))}
+            <tr key={inventoryItems.item_id}>
+              <button className="delete" onClick={() => handleDelete(inventoryItems.item_id)}>Delete</button>
+              <td>{inventoryItems.item_id}</td>
+              <td>{inventoryItems.item_name}</td>
+              <td>{inventoryItems.item_price}</td>
+              <td>{inventoryItems.remaining_stock}</td>
+            </tr>
+          ))}
         </table>
       </div>
 
       {/* Adding a Inventory Item form */}
-      <div>
+      <div className="form-container">
         <form id="addInventoryItem">
           <legend><strong>Add Inventory Item</strong></legend>
           <fieldset class="fields">
-            <label> Item Name </label> <input type="text" name="itemName" onChange={(e) => setItemName(e.target.value)}></input>
-            <label> Item Price </label> <input type="text" name="itemPrice" onChange={(e) => setItemPrice(e.target.value)}></input>
-			      <label> Remaining Stock </label> <input type="text" name="remainingStock" onChange={(e) => setRemainingStock(e.target.value)}></input>
+            <label className="form-label"> Item Name </label> <input type="text" name="itemName" className="form-input" onChange={(e) => setItemName(e.target.value)}></input>
+            <label className="form-label"> Item Price </label> <input type="text" name="itemPrice" className="form-input" onChange={(e) => setItemPrice(e.target.value)}></input>
+			      <label className="form-label"> Remaining Stock </label> <input type="text" name="remainingStock" className="form-input" onChange={(e) => setRemainingStock(e.target.value)}></input>
           </fieldset>
-          <input class="btn" type="submit" id="addInventoryItem" value="Add Inventory Item" onClick={(handleAdd)}></input>
+          <input class="form-btn" type="submit" id="addInventoryItem" value="Add Inventory Item" onClick={(handleAdd)}></input>
         </form>
       </div>
-      
       <br></br>
 
       {/* Editing a Inventory Item form */}
-      <form id="UpdateInventoryItem">
-				<legend><strong>Update Inventory Item</strong></legend>
-				<fieldset class="fields">
-					<input type="hidden"></input>
-					<label> Item ID: </label> <DropdownComponent ids={inventoryItems.map(({ item_id }) => item_id)} onSelect={setUpdateInventoryItemsId}/>
-					<label> Item Name </label> <input type="text" name="itemName" onChange={(e) => setUpdateItemName(e.target.value)}></input>
-					<label> Item Price </label> <input type="text" name="itemPrice" onChange={(e) => setUpdateItemPrice(e.target.value)}></input>
-					<label> Remaining Stock </label> <input type="text" name="remainingStock" onChange={(e) => setUpdateRemainingStock(e.target.value)}></input>
-				</fieldset>
-					<input class="btn" type="submit" id="UpdateInventoryItem" value="Save Update Inventory Item" onClick={(handleUpdate)}></input>
-			</form> 
-      
+      <div className="form-container">
+        <form id="UpdateInventoryItem">
+          <legend><strong>Update Inventory Item</strong></legend>
+          <fieldset class="fields">
+            <input type="hidden"></input>
+            <label className="form-label"> Item ID: </label> <DropdownComponent ids={inventoryItems.map(({ item_id }) => item_id)} onSelect={setUpdateInventoryItemsId}/>
+            <label className="form-label"> Item Name </label> <input type="text" name="itemName" className="form-input" onChange={(e) => setUpdateItemName(e.target.value)}></input>
+            <label className="form-label"> Item Price </label> <input type="text" name="itemPrice" className="form-input" onChange={(e) => setUpdateItemPrice(e.target.value)}></input>
+            <label className="form-label"> Remaining Stock </label> <input type="text" name="remainingStock" className="form-input" onChange={(e) => setUpdateRemainingStock(e.target.value)}></input>
+          </fieldset>
+          <input class="form-btn" type="submit" id="UpdateInventoryItem" value="Save Update Inventory Item" onClick={(handleUpdate)}></input>
+        </form> 
+      </div>
       <br></br>
-
     </div>
   );
 };

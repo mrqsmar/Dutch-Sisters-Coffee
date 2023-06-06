@@ -73,16 +73,13 @@ const Sales = () => {
       console.log(err);
     }
   };
-
-  
   return (
-    <div>
+    <div className="entity-page">
       <h1>Sales</h1>
       <h2>Browse, Add, Update or Delete Sales</h2>
-      <div className="sales">
+      <div className="table-container">
         <table border="1" cellpadding="5">
           <tr>
-            <th><a href="#" onClick="newSale()">New</a></th>
             <th></th>
             <th>ID</th>
             <th>Sale Amount</th>
@@ -90,59 +87,56 @@ const Sales = () => {
             <th>Sale Item ID</th>
             <th>Cafe ID</th>
           </tr>
-
           {sales.map((sales) => (
-              <tr key={sales.sale_id}>
-                <td><a href="#" onClick="editSale()">Edit</a></td>
-                <button className="delete" onClick={() => handleDelete(sales.sale_id)}>Delete</button>
-                <td>{sales.sale_id}</td>
-                <td>{sales.sale_amount}</td>
-                <td>{sales.sale_date}</td>
-                <td>{sales.sale_item_id}</td>
-                <td>{sales.cafe_id || "NULL"}</td>
-              </tr>
-        ))}
+            <tr key={sales.sale_id}>
+              <button className="delete" onClick={() => handleDelete(sales.sale_id)}>Delete</button>
+              <td>{sales.sale_id}</td>
+              <td>{sales.sale_amount}</td>
+              <td>{sales.sale_date}</td>
+              <td>{sales.sale_item_id}</td>
+              <td>{sales.cafe_id || "NULL"}</td>
+            </tr>
+          ))}
         </table>
       </div>
 
       {/* Adding a new Sale form */}
-      <div>
+      <div className="form-container">
         <form id="addSale">
         	<legend><strong>Add Sale</strong></legend>
-			<fieldset class="fields">
-				<label> Sale Amount </label> <input type="text" name="saleAmount" onChange={(e) => setSaleAmount(e.target.value)}></input>
-				
-        {/* Should be a date input */}
-				<label> Sale Date </label> <input type="text" name="saleDate" onChange={(e) => setSaleDate(e.target.value)}></input> 
+			    <fieldset class="fields">
+            <label className="form-label"> Sale Amount </label> <input type="text" name="saleAmount" className="form-input" onChange={(e) => setSaleAmount(e.target.value)}></input>
+            
+            {/* Should be a date input */}
+            <label className="form-label"> Sale Date </label> <input type="text" name="saleDate" className="form-input" onChange={(e) => setSaleDate(e.target.value)}></input> 
 
-				{/* Should be a dropdown of all items available, since this is a fk */}
-				<label> Sale Item Sold </label> <DropdownComponent ids={sales.map(({ sale_item_id }) => sale_item_id)} onSelect={setSaleItemId}/>
-				{/* Should be a dropdown of all cafes available, since this is a fk */}
-				<label> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setCafeId}/>
+            {/* Should be a dropdown of all items available, since this is a fk */}
+            <label className="form-label"> Sale Item Sold </label> <DropdownComponent ids={sales.map(({ sale_item_id }) => sale_item_id)} onSelect={setSaleItemId}/>
+            {/* Should be a dropdown of all cafes available, since this is a fk */}
+            <label className="form-label"> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setCafeId}/>
 		
-			</fieldset>
-			<input class="btn" type="submit" id="addSale" value="Add Sale" onClick={handleAdd}></input>
-		</form>
+          </fieldset>
+          <input class="form-btn" type="submit" id="addSale" value="Add Sale" onClick={handleAdd}></input>
+        </form>
       </div>
-      
       <br></br>
 
       {/* Editing a Sale form */}
-      <form id="UpdateSales">
-				<legend><strong>Update Sale</strong></legend>
-				<fieldset class="fields">
-					<input type="hidden"></input>
-					<label> Sale ID: </label> <DropdownComponent ids={sales.map(({ sale_id }) => sale_id)} onSelect={setUpdateSaleId}/>
-					<label> Sale Amount </label> <input type="text" name="saleAmount" onChange={(e) => setUpdateSaleAmount(e.target.value)}></input>
-					<label> Sale Date </label> <input type="text" name="saleDate" onChange={(e) => setUpdateSaleDate(e.target.value)}></input>
-          <label> Sale Item Sold </label> <input type="text" name="itemSold" onChange={(e) => setUpdateSaleItemId(e.target.value)}></input>
-					<label> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
-				</fieldset>
-					<input class="btn" type="submit" id="UpdateSaveSales" value="Save Update Sale" onClick={handleUpdate}></input>
-			</form> 
-      
+      <div className="form-container">
+        <form id="UpdateSales">
+          <legend><strong>Update Sale</strong></legend>
+          <fieldset class="fields">
+            <input type="hidden"></input>
+            <label className="form-label"> Sale ID: </label> <DropdownComponent ids={sales.map(({ sale_id }) => sale_id)} onSelect={setUpdateSaleId}/>
+            <label className="form-label"> Sale Amount </label> <input type="text" name="saleAmount" className="form-input" onChange={(e) => setUpdateSaleAmount(e.target.value)}></input>
+            <label className="form-label"> Sale Date </label> <input type="text" name="saleDate" className="form-input" onChange={(e) => setUpdateSaleDate(e.target.value)}></input>
+            <label className="form-label"> Sale Item Sold </label> <input type="text" name="itemSold" className="form-input" onChange={(e) => setUpdateSaleItemId(e.target.value)}></input>
+            <label className="form-label"> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
+          </fieldset>
+          <input class="form-btn" type="submit" id="UpdateSaveSales" value="Save Update Sale" onClick={handleUpdate}></input>
+        </form> 
+      </div>
       <br></br>
-
     </div>
   );
 };
