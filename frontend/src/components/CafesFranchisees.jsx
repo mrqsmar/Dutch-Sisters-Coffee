@@ -92,39 +92,41 @@ const CafesFranchisees = () => {
       </div>
 
       {/* Adding a new cafesFranchisees form */}
-      <div>
+      <div className="form-container">
         <form id="addCafesFranchisees">
         	<legend><strong>Add Cafe Franchisees</strong></legend>
 			    <fieldset class="fields">
 				
             {/* Should be a dropdown of all cafes available, since this is a fk */}
-            <label> cafe id </label> <input type="text" name="cafeId" onChange={(e) => setCafeId(e.target.value)}></input> 
+            <label className="form-label"> cafe id </label> <input type="text" name="cafeId" onChange={(e) => setCafeId(e.target.value)}></input> 
 
             {/* Should be a dropdown of all franchisees available, since this is a fk */}
-            <label> franchisee id </label> <input type="text" name="franchiseeId" onChange={(e) => setFranchiseeId(e.target.value)}></input> 
+            <label className="form-label"> franchisee id </label> <input type="text" name="franchiseeId" onChange={(e) => setFranchiseeId(e.target.value)}></input> 
       
           </fieldset>
-          <input class="btn" type="submit" id="addCafesFranchisees" value="Add Cafe Franchisee" onClick={handleAdd}></input>
+          <input class="form-btn" type="submit" id="addCafesFranchisees" value="Add Cafe Franchisee" onClick={handleAdd}></input>
         </form>
       </div>
       
       <br></br>
 
       {/* Editing a line item form */}
-      <form id="UpdateCafeFranchisee">
-				<legend><strong>Update Cafe Franchisee</strong></legend>
-				<fieldset class="fields">
-          <label> ID: </label> <DropdownMenuField ids={cafesFranchisees.map(({ id }) => id)} onSelect={setUpdateId} />
+      <div className="form-container">
+        <form id="UpdateCafeFranchisee">
+          <legend><strong>Update Cafe Franchisee</strong></legend>
+          <fieldset class="fields">
+            <label className="form-label"> ID: </label> <DropdownMenuField ids={cafesFranchisees.map(({ id }) => id)} onSelect={setUpdateId} />
 
-            {/* Should be a dropdown of all cafes available, since this is a fk */}
-            <label> cafe id </label> <input type="text" name="cafeId" onChange={(e) => setUpdateCafeId(e.target.value)}></input> 
+              {/* Should be a dropdown of all cafes available, since this is a fk */}
+              <label className="form-label"> cafe id </label> <input type="text" name="cafeId" className="form-input" onChange={(e) => setUpdateCafeId(e.target.value)}></input> 
 
-            {/* Should be a dropdown of all franchisees available, since this is a fk */}
-            <label> franchisee id </label> <input type="text" name="franchiseeId" onChange={(e) => setUpdateFranchiseeId(e.target.value)}></input> 
+              {/* Should be a dropdown of all franchisees available, since this is a fk */}
+              <label className="form-label"> franchisee id </label> <input type="text" name="franchiseeId" className="form-input" onChange={(e) => setUpdateFranchiseeId(e.target.value)}></input> 
 
-				</fieldset>
-					<input class="btn" type="submit" id="UpdateCafeFranchisees" value="Save Cafes Franchisee" onClick={handleUpdate}></input>
-			</form> 
+          </fieldset>
+            <input class="form-btn" type="submit" id="UpdateCafeFranchisees" value="Save Cafes Franchisee" onClick={handleUpdate}></input>
+        </form> 
+      </div>
       <br></br>
     </div>
   );

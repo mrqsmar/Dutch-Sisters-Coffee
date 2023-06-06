@@ -11,7 +11,7 @@ function DropdownMenuField({ ids, onSelect }) {
 
   return (
     <div>
-      <select value={selectedId} onChange={handleSelect}>
+      <select className='select-field' value={selectedId} onChange={handleSelect}>
         <option value="">Select an ID</option>
         {ids.map((id) => (
           <option key={id} value={id}>
@@ -19,7 +19,6 @@ function DropdownMenuField({ ids, onSelect }) {
           </option>
         ))}
       </select>
-      <p>Selected ID: {selectedId}</p>
     </div>
   );
 }
