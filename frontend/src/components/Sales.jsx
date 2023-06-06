@@ -11,7 +11,7 @@ const Sales = () => {
   useEffect(() => {
     const fetchAllSales = async () => {
       try {
-        const res = await axios.get("http://flip2.engr.oregonstate.edu:8299/sales");
+        const res = await axios.get(process.env.REACT_APP_DB_URL + `sales`);
         setSales(res.data);
       } catch (err) {
         console.log(err);
@@ -22,7 +22,7 @@ const Sales = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://flip2.engr.oregonstate.edu:8299/sales/${id}`);
+      await axios.delete(process.env.REACT_APP_DB_URL + `sales/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
@@ -39,7 +39,7 @@ const Sales = () => {
     e.preventDefault()
 
     try {
-      await axios.post(`http://flip2.engr.oregonstate.edu:8299/sales`, {
+      await axios.post(process.env.REACT_APP_DB_URL + `sales`, {
         sale_amount: saleAmount,
         sale_date: saleDate,
         sale_item_id: saleItemId,
@@ -61,7 +61,7 @@ const Sales = () => {
     e.preventDefault()
 
     try {
-      await axios.put(`http://flip2.engr.oregonstate.edu:8299/sales`, {
+      await axios.put(process.env.REACT_APP_DB_URL + `sales`, {
         sale_id: updateSaleId,
         sale_amount: updateSaleAmount,
         sale_date: updateSaleDate,

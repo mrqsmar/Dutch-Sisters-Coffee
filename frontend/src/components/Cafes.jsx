@@ -10,7 +10,7 @@ const Cafes = () => {
   useEffect(() => {
     const fetchAllCafes = async () => {
       try {
-        const res = await axios.get("http://flip2.engr.oregonstate.edu:8299/cafes");
+        const res = await axios.get(process.env.REACT_APP_DB_URL + "cafes");
         setCafes(res.data);
       } catch (err) {
         console.log(err);
@@ -23,7 +23,7 @@ const Cafes = () => {
   // Deleting 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://flip2.engr.oregonstate.edu:8299/cafes/${id}`);
+      await axios.delete(process.env.REACT_APP_DB_URL + `cafes/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
@@ -42,7 +42,7 @@ const Cafes = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`http://flip2.engr.oregonstate.edu:8299/cafes/`, {
+      await axios.post(process.env.REACT_APP_DB_URL + "cafes/", {
         street_address: streetAddress,
         street_name: streetName,
         city: city,
@@ -69,7 +69,7 @@ const Cafes = () => {
       e.preventDefault();
   
       try {
-        await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes/`, {
+        await axios.put(process.env.REACT_APP_DB_URL + "cafes/", {
         cafe_id: updateCafeId,
         street_address: updateStreetAddress,
         street_name: updateStreetName,

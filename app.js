@@ -3,6 +3,7 @@
 */
 
 const cors=require('cors');
+require('dotenv').config({path: __dirname + '/.env'})
 
 // Express
 var express = require('express');   // We are using the express library for the web server
@@ -10,7 +11,9 @@ var app     = express();            // We need to instantiate an express object 
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 8299;                 // Set a port number at the top so it's easy to change in the future
+console.log(process.env)
+
+const PORT = process.env.DB_PORT;
 
 // Database
 var db = require('./db-connector')
@@ -591,5 +594,5 @@ app.put('/cafes_franchisees', function(req,res,next){
     LISTENER
 */
 app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
-    console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
+    console.log('Express started on ' + process.env.DB_URL + '; press Ctrl-C to terminate.')
 });

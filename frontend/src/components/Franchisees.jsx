@@ -11,7 +11,7 @@ const Franchisees = () => {
   useEffect(() => {
     const fetchAllFranchisees = async () => {
       try {
-        const res = await axios.get("http://flip2.engr.oregonstate.edu:8299/franchisees");
+        const res = await axios.get(process.env.REACT_APP_DB_URL + `franchisees`);
         setFranchisees(res.data);
       } catch (err) {
         console.log(err);
@@ -23,7 +23,7 @@ const Franchisees = () => {
   // Deleting
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://flip2.engr.oregonstate.edu:8299/franchisees/${id}`);
+      await axios.delete(process.env.REACT_APP_DB_URL + `franchisees/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
@@ -38,7 +38,7 @@ const Franchisees = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`http://flip2.engr.oregonstate.edu:8299/franchisees/`, {
+      await axios.post(process.env.REACT_APP_DB_URL + `franchisees/`, {
         first_name: firstName,
         last_name: lastName
       });
@@ -57,7 +57,7 @@ const Franchisees = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://flip2.engr.oregonstate.edu:8299/franchisees/`, {
+      await axios.put(process.env.REACT_APP_DB_URL + `franchisees/`, {
         franchisee_id: updateFranchiseeId,
         first_name: updateFirstName,
         last_name: updateLastName

@@ -11,7 +11,7 @@ const SaleItems = () => {
   useEffect(() => {
     const fetchAllSaleItems = async () => {
       try {
-        const res = await axios.get("http://flip2.engr.oregonstate.edu:8299/sale_items");
+        const res = await axios.get(process.env.REACT_APP_DB_URL + `sale_items`);
         setSaleItems(res.data);
       } catch (err) {
         console.log(err);
@@ -22,7 +22,7 @@ const SaleItems = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://flip2.engr.oregonstate.edu:8299/sale_items/${id}`);
+      await axios.delete(process.env.REACT_APP_DB_URL + `sale_items/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
@@ -37,7 +37,7 @@ const SaleItems = () => {
     e.preventDefault()
 
     try {
-      await axios.post("http://flip2.engr.oregonstate.edu:8299/sale_items", {
+      await axios.post(`http://flip2.engr.oregonstate.edu:8299/sale_items`, {
         item_name: itemName,
         item_price: itemPrice
       });
@@ -55,7 +55,7 @@ const SaleItems = () => {
     e.preventDefault()
 
     try {
-      await axios.put("http://flip2.engr.oregonstate.edu:8299/sale_items", {   
+      await axios.put(`http://flip2.engr.oregonstate.edu:8299/sale_items`, {   
         sale_item_id: updateSaleItemId,
         item_name: updateItemName,
         item_price: updateItemPrice

@@ -11,7 +11,7 @@ const InventoryItems = () => {
   useEffect(() => {
     const fetchAllInventoryItems = async () => {
       try {
-        const res = await axios.get("http://flip2.engr.oregonstate.edu:8299/inventory_items");
+        const res = await axios.get(process.env.REACT_APP_DB_URL + `inventory_items`);
         setInventoryItems(res.data);
       } catch (err) {
         console.log(err);
@@ -22,7 +22,7 @@ const InventoryItems = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://flip2.engr.oregonstate.edu:8299/inventory_items/${id}`);
+      await axios.delete(process.env.REACT_APP_DB_URL + `inventory_items/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
@@ -39,7 +39,7 @@ const InventoryItems = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`http://flip2.engr.oregonstate.edu:8299/inventory_items/`, {
+      await axios.post(process.env.REACT_APP_DB_URL + `inventory_items/`, {
         item_name: itemName,
         item_price: itemPrice,
         remaining_stock: remainingStock
@@ -60,7 +60,7 @@ const InventoryItems = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://flip2.engr.oregonstate.edu:8299/inventory_items/`, {
+      await axios.put(process.env.REACT_APP_DB_URL + `inventory_items/`, {
         item_id: updateInventoryItemsId,
         item_name: updateItemName,
         item_price: updateItemPrice,
