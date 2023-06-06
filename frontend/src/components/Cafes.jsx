@@ -100,8 +100,6 @@ const Cafes = () => {
             <th>Country</th>
             <th>Zip Code</th>
           </tr>
-
-
           {cafes.map((cafe) => (
               <tr key={cafe.cafe_id}>
                 <button className="delete" onClick={() => handleDelete(cafe.cafe_id)}>Delete</button>

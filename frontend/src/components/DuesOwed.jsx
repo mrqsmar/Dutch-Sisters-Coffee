@@ -101,33 +101,35 @@ const DuesOwed = () => {
       </div>
 
       {/* Adding a new Due Owed form */}
-      <div>
+      <div className="form-container">
         <form id="addDueOwed">
         	<legend><strong>Add Dues Owed</strong></legend>
 			    <fieldset class="fields">
-            <label> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setFranchiseeId}/>
-            <label> Amount Due </label> <input type="text" name="amountDue" onChange={(e) => setAmountDue(e.target.value)}></input>
-            <label> Due Date </label> <input type="text" name="dueDate" onChange={(e) => setDueDate(e.target.value)}></input>
-            <label> Late Fees </label> <input type="text" name="lateFees" onChange={(e) => setLateFees(e.target.value)}></input>
+            <label className="form-label"> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setFranchiseeId}/>
+            <label className="form-label"> Amount Due </label> <input type="text" name="amountDue" className="form-input" onChange={(e) => setAmountDue(e.target.value)}></input>
+            <label className="form-label"> Due Date </label> <input type="text" name="dueDate" className="form-input" onChange={(e) => setDueDate(e.target.value)}></input>
+            <label className="form-label"> Late Fees </label> <input type="text" name="lateFees" className="form-input" onChange={(e) => setLateFees(e.target.value)}></input>
           </fieldset>
-			    <input class="btn" type="submit" id="addDueOwed" value="Add Due Owed" onClick={(handleAdd)}></input>
+			    <input class="form-btn" type="submit" id="addDueOwed" value="Add Due Owed" onClick={(handleAdd)}></input>
 		    </form>
       </div>      
       <br></br>
 
       {/* Editing a Due Owed form */}
-      <form id="UpdateDuesOwed">
-				<legend><strong>Update Due Owed</strong></legend>
-				<fieldset class="fields">
-					<input type="hidden"></input>
-					<label> Dues Owed ID: </label> <DropdownComponent ids={duesOwed.map(({ dues_invoice_id }) => dues_invoice_id)} onSelect={setUpdateDuesInvoiceId}/>
-          <label> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setUpdateFranchiseeId}/>
-					<label> Amount Due </label> <input type="text" name="amountDue" onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
-					<label> Due Date </label> <input type="text" name="dueDate" onChange={(e) => setUpdateDueDate(e.target.value)}></input>
-					<label> Late Fees </label> <input type="text" name="lateFees" onChange={(e) => setUpdateLateFees(e.target.value)}></input>
-				</fieldset>
-				<input class="btn" type="submit" id="UpdateSaveDuesOwed" value="Save Update Dues Owed" onClick={(handleUpdate)}></input>
-			</form> 
+      <div className="form-container">
+        <form id="UpdateDuesOwed">
+          <legend><strong>Update Due Owed</strong></legend>
+          <fieldset class="fields">
+            <input type="hidden"></input>
+            <label className="form-label"> Dues Owed ID: </label> <DropdownComponent ids={duesOwed.map(({ dues_invoice_id }) => dues_invoice_id)} onSelect={setUpdateDuesInvoiceId}/>
+            <label className="form-label"> Franchisee ID </label> <DropdownComponent ids={duesOwed.map(({ franchisee_id }) => franchisee_id)} onSelect={setUpdateFranchiseeId}/>
+            <label className="form-label"> Amount Due </label> <input type="text" name="amountDue" className="form-input" onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
+            <label className="form-label"> Due Date </label> <input type="text" name="dueDate" className="form-input" onChange={(e) => setUpdateDueDate(e.target.value)}></input>
+            <label className="form-label"> Late Fees </label> <input type="text" name="lateFees" className="form-input" onChange={(e) => setUpdateLateFees(e.target.value)}></input>
+          </fieldset>
+          <input class="form-btn" type="submit" id="UpdateSaveDuesOwed" value="Save Update Dues Owed" onClick={(handleUpdate)}></input>
+        </form> 
+      </div>
       <br></br>
     </div>
   );
