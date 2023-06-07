@@ -98,10 +98,10 @@ const CafesFranchisees = () => {
 			    <fieldset class="fields">
 				
             {/* Should be a dropdown of all cafes available, since this is a fk */}
-            <label className="form-label"> cafe id </label> <input type="text" name="cafeId" onChange={(e) => setCafeId(e.target.value)}></input> 
+            <label className="form-label"> Cafe ID </label> <input type="text" name="cafeId" onChange={(e) => setCafeId(e.target.value)}></input> 
 
             {/* Should be a dropdown of all franchisees available, since this is a fk */}
-            <label className="form-label"> franchisee id </label> <input type="text" name="franchiseeId" onChange={(e) => setFranchiseeId(e.target.value)}></input> 
+            <label className="form-label"> Franchisee ID </label> <input type="text" name="franchiseeId" onChange={(e) => setFranchiseeId(e.target.value)}></input> 
       
           </fieldset>
           <input class="form-btn" type="submit" id="addCafesFranchisees" value="Add Cafe Franchisee" onClick={handleAdd}></input>
@@ -118,10 +118,10 @@ const CafesFranchisees = () => {
             <label className="form-label"> ID: </label> <DropdownMenuField ids={cafesFranchisees.map(({ id }) => id)} onSelect={setUpdateId} />
 
               {/* Should be a dropdown of all cafes available, since this is a fk */}
-              <label className="form-label"> cafe id </label> <input type="text" name="cafeId" className="form-input" onChange={(e) => setUpdateCafeId(e.target.value)}></input> 
+              <label className="form-label"> Cafe ID </label> <input type="text" name="cafeId" className="form-input" onChange={(e) => setUpdateCafeId(e.target.value)}></input> 
 
               {/* Should be a dropdown of all franchisees available, since this is a fk */}
-              <label className="form-label"> franchisee id </label> <input type="text" name="franchiseeId" className="form-input" onChange={(e) => setUpdateFranchiseeId(e.target.value)}></input> 
+              <label className="form-label"> Franchisee ID </label> <input type="text" name="franchiseeId" className="form-input" onChange={(e) => setUpdateFranchiseeId(e.target.value)}></input> 
 
           </fieldset>
             <input class="form-btn" type="submit" id="UpdateCafeFranchisees" value="Save Cafes Franchisee" onClick={handleUpdate}></input>

@@ -1,4 +1,5 @@
 .App {
+  overflow: hidden;
   text-align: center;
 }
 
@@ -24,6 +25,8 @@
   color: white;
 }
 
+
+
 .App-link {
   color: #61dafb;
 }
@@ -40,6 +43,11 @@
 /***********************/
 /* Non stock CSS below */
 /***********************/
+
+body {
+  background-color: #DCDCDC;
+  margin: 0px auto;
+}
 
 .header-container {
   background-color: rgb(150,200,255);
@@ -86,7 +94,7 @@
   justify-content: center;
 }
 
-.table {
+table {
   width: 100%;
 }
 
@@ -115,6 +123,7 @@
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
+  text-align: center;
   border-radius: 4px;
   margin-bottom: 10px;
 }
@@ -127,3 +136,5 @@
 .select-field {
   margin-bottom: 7px;
 }
+
+

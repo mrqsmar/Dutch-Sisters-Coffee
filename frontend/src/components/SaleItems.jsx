@@ -75,7 +75,7 @@ const SaleItems = () => {
             <th></th>
             <th>ID</th>
             <th>Item Name</th>
-            <th>item Price</th>
+            <th>Item Price</th>
           </tr>
           {saleItems.map((saleItems) => (
             <tr key={saleItems.sale_item_id}>

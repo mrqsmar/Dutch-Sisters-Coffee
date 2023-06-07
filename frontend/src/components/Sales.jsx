@@ -108,7 +108,7 @@ const Sales = () => {
             <label className="form-label"> Sale Amount </label> <input type="text" name="saleAmount" className="form-input" onChange={(e) => setSaleAmount(e.target.value)}></input>
             
             {/* Should be a date input */}
-            <label className="form-label"> Sale Date </label> <input type="text" name="saleDate" className="form-input" onChange={(e) => setSaleDate(e.target.value)}></input> 
+            <label className="form-label"> Sale Date </label> <input type="date" name="saleDate" className="form-input" onChange={(e) => setSaleDate(e.target.value)}></input> 
 
             {/* Should be a dropdown of all items available, since this is a fk */}
             <label className="form-label"> Sale Item Sold </label> <DropdownComponent ids={sales.map(({ sale_item_id }) => sale_item_id)} onSelect={setSaleItemId}/>
@@ -129,7 +129,7 @@ const Sales = () => {
             <input type="hidden"></input>
             <label className="form-label"> Sale ID: </label> <DropdownComponent ids={sales.map(({ sale_id }) => sale_id)} onSelect={setUpdateSaleId}/>
             <label className="form-label"> Sale Amount </label> <input type="text" name="saleAmount" className="form-input" onChange={(e) => setUpdateSaleAmount(e.target.value)}></input>
-            <label className="form-label"> Sale Date </label> <input type="text" name="saleDate" className="form-input" onChange={(e) => setUpdateSaleDate(e.target.value)}></input>
+            <label className="form-label"> Sale Date </label> <input type="date" name="saleDate" className="form-input" onChange={(e) => setUpdateSaleDate(e.target.value)}></input>
             <label className="form-label"> Sale Item Sold </label> <input type="text" name="itemSold" className="form-input" onChange={(e) => setUpdateSaleItemId(e.target.value)}></input>
             <label className="form-label"> Cafe ID </label> <DropdownComponent ids={sales.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
           </fieldset>
