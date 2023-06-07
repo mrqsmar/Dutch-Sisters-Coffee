@@ -10,7 +10,7 @@ const CafesFranchisees = () => {
   useEffect(() => {
     const fetchAllCafesFranchisees = async () => {
       try {
-        const res = await axios.get("http://flip2.engr.oregonstate.edu:8299/cafes_franchisees");
+        const res = await axios.get(process.env.REACT_APP_DB_URL + `cafes_franchisees`);
         setCafesFranchisees(res.data);
       } catch (err) {
         console.log(err);
@@ -21,7 +21,7 @@ const CafesFranchisees = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://flip2.engr.oregonstate.edu:8299/cafes_franchisees/${id}`);
+      await axios.delete(process.env.REACT_APP_DB_URL + `cafes_franchisees/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
@@ -36,7 +36,7 @@ const CafesFranchisees = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`http://flip2.engr.oregonstate.edu:8299/cafes_franchisees/`, {
+      await axios.post(process.env.REACT_APP_DB_URL + `cafes_franchisees/`, {
         franchisee_id: franchiseeId,
         cafe_id: cafeId
       });
@@ -56,7 +56,7 @@ const CafesFranchisees = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://flip2.engr.oregonstate.edu:8299/cafes_franchisees/`, {
+      await axios.put(process.env.REACT_APP_DB_URL + `cafes_franchisees/`, {
         id: updateId,
         franchisee_id: updateFranchiseeId,
         cafe_id: updateCafeId

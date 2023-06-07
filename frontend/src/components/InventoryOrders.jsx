@@ -12,7 +12,7 @@ const InventoryOrders = () => {
   useEffect(() => {
     const fetchAllInventoryOrders = async () => {
       try {
-        const res = await axios.get("http://flip2.engr.oregonstate.edu:8299/inventory_orders");
+        const res = await axios.get(process.env.REACT_APP_DB_URL + `inventory_orders`);
         setInventoryOrders(res.data);
       } catch (err) {
         console.log(err);
@@ -23,7 +23,7 @@ const InventoryOrders = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://flip2.engr.oregonstate.edu:8299/inventory_orders/${id}`);
+      await axios.delete(process.env.REACT_APP_DB_URL + `inventory_orders/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
@@ -39,7 +39,7 @@ const InventoryOrders = () => {
     e.preventDefault()
 
     try {
-      await axios.post("http://flip2.engr.oregonstate.edu:8299/inventory_orders", {
+      await axios.post(process.env.REACT_APP_DB_URL + `inventory_orders`, {
         cafe_id: cafeId,
         item_id: itemId,
         quantity_ordered: quantityOrdered,
@@ -63,7 +63,7 @@ const InventoryOrders = () => {
     e.preventDefault()
 
     try {
-      await axios.put("http://flip2.engr.oregonstate.edu:8299/inventory_orders", {
+      await axios.put(process.env.REACT_APP_DB_URL + `inventory_orders`, {
         order_id: updateOrderId,
         cafe_id: updateCafeId,
         item_id: updateItemId,

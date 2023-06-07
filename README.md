@@ -30,3 +30,20 @@ Any changes made to the frontend will not show up on the flip server unless you 
 ```sh
 $ npm run build
 ```
+
+You will need to make 2 .env files, one in the root directory for backend and one in the frontend directory for the frontend code. 
+
+for the backend, add the following to the .env file:
+DB_HOST=your_db_host, likeley classmysql.engr.oregonstate.edu
+DB_USER=your_username
+DB_PASSWORD=your_pw
+DB_NAME=your_db_name
+DB_PORT=your_db_port
+DB_URL=your_db_url
+FE_PORT=your_frontend_port
+FE_URL=your_frontend_url 
+
+for the frontend, add the following to the .env file:
+REACT_APP_DB_URL=http://flip2.engr.oregonstate.edu:8299/
+REACT_APP_FE_PORT=8300
+REACT_APP_FE_URL=http://flip2.engr.oregonstate.edu:8300/

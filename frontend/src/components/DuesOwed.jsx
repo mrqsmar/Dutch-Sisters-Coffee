@@ -10,7 +10,7 @@ const DuesOwed = () => {
   useEffect(() => {
     const fetchAllDuesOwed = async () => {
       try {
-        const res = await axios.get("http://flip2.engr.oregonstate.edu:8299/dues_owed");
+        const res = await axios.get(process.env.REACT_APP_DB_URL + `dues_owed`);
         setDuesOwed(res.data);
       } catch (err) {
         console.log(err);
@@ -21,7 +21,7 @@ const DuesOwed = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://flip2.engr.oregonstate.edu:8299/dues_owed/${id}`);
+      await axios.delete(process.env.REACT_APP_DB_URL + `dues_owed/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
@@ -38,7 +38,7 @@ const DuesOwed = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`http://flip2.engr.oregonstate.edu:8299/dues_owed/`, {
+      await axios.post(process.env.REACT_APP_DB_URL + `dues_owed/`, {
         franchisee_id: franchisee_id,
         amount_due: amountDue,
         due_date: dueDate,
@@ -61,7 +61,7 @@ const DuesOwed = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://flip2.engr.oregonstate.edu:8299/dues_owed/`, {
+      await axios.put(process.env.REACT_APP_DB_URL + `dues_owed/`, {
         dues_invoice_id: updateDuesInvoiceId,
         franchisee_id: updateFranchiseeId,
         amount_due: updateAmountDue,
