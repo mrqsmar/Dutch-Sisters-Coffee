@@ -113,8 +113,8 @@ const InventoryOrders = () => {
 
 			      {/* This should be a drop down of all the item ids, fk */}
             <label className="form-label"> Item Ordered </label> <DropdownComponent ids={inventoryOrders.map(({ item_id }) => item_id)} onSelect={setItemId}/>
-			      <label className="form-label"> Quantity Ordered </label> <input type="text" name="quantityOrdered" className="form-input" onChange={(e) => setQuantityOrdered(e.target.value)}></input>
-			      <label className="form-label"> Amount Due </label> <input type="text" name="amountDue" className="form-input" onChange={(e) => setAmountDue(e.target.value)}></input>
+			      <label className="form-label"> Quantity Ordered </label> <input type="number" name="quantityOrdered" className="form-input" onChange={(e) => setQuantityOrdered(e.target.value)}></input>
+			      <label className="form-label"> Amount Due </label> <input type="number" name="amountDue" className="form-input" onChange={(e) => setAmountDue(e.target.value)}></input>
           </fieldset>
           <input class="form-btn" type="submit" id="addInventoryOrder" value="Add Inventory Order" onClick={(handleAdd)}></input>
         </form>
@@ -133,8 +133,8 @@ const InventoryOrders = () => {
             <label className="form-label"> Cafe ID </label> <DropdownComponent ids={inventoryOrders.map(({ cafe_id }) => cafe_id)} onSelect={setUpdateCafeId}/>
             {/* This should be a drop down of all the item ids, fk */}
             <label className="form-label"> Item Ordered </label> <DropdownComponent ids={inventoryOrders.map(({ item_id }) => item_id)} onSelect={setUpdateItemId}/>
-            <label className="form-label"> Quantity Ordered </label> <input type="text" name="quantityOrdered" className="form-input" onChange={(e) => setUpdateQuantityOrdered(e.target.value)}></input>
-            <label className="form-label"> Amount Due </label> <input type="text" name="amountDue" className="form-input" onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
+            <label className="form-label"> Quantity Ordered </label> <input type="number" name="quantityOrdered" className="form-input" onChange={(e) => setUpdateQuantityOrdered(e.target.value)}></input>
+            <label className="form-label"> Amount Due </label> <input type="number" name="amountDue" className="form-input" onChange={(e) => setUpdateAmountDue(e.target.value)}></input>
           </fieldset>
           <input class="form-btn" type="submit" id="UpdateInventoryOrder" value="Save Update Inventory Order" onClick={(handleUpdate)}></input>
         </form> 

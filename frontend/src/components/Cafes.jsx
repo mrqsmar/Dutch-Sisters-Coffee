@@ -136,7 +136,7 @@ const Cafes = () => {
             <input type="text" name="country" className="form-input" onChange={(e) => setCountry(e.target.value)} />
             
             <label className="form-label"> Zip Code </label>
-            <input type="text" name="zipCode" className="form-input" onChange={(e) => setZipCode(e.target.value)} />
+            <input type="number" name="zipCode" className="form-input" onChange={(e) => setZipCode(e.target.value)} />
           </fieldset>
           <input className="form-btn" type="submit" id="addCafe" value="Add Cafe" onClick={handleAdd} />
         </form>
@@ -156,7 +156,7 @@ const Cafes = () => {
             <label className="form-label"> City </label> <input type="text" name="city" className="form-input" onChange={(e) => setUpdateCity(e.target.value)}></input>
             <label className="form-label"> State </label> <input type="text" name="state" className="form-input" onChange={(e) => setUpdateState(e.target.value)}></input>
             <label className="form-label"> Country </label> <input type="text" name="country" className="form-input" onChange={(e) => setUpdateCountry(e.target.value)}></input>
-            <label className="form-label"> Zip Code </label> <input type="text" name="zipCode" className="form-input" onChange={(e) => setUpdateZipCode(e.target.value)}></input>
+            <label className="form-label"> Zip Code </label> <input type="number" name="zipCode" className="form-input" onChange={(e) => setUpdateZipCode(e.target.value)}></input>
           </fieldset>
           <input class="form-btn" type="submit" id="UpdateSaveCafe" value="Save Update Cafe" onClick={(handleUpdate)}></input>
         </form> 

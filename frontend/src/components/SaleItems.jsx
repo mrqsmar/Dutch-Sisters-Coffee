@@ -94,7 +94,7 @@ const SaleItems = () => {
           <legend><strong>Add Sale Item</strong></legend>
           <fieldset class="fields">
             <label className="form-label"> Item Name </label> <input type="text" name="itemName" className="form-input" onChange={(e) => setItemName(e.target.value)}></input>
-            <label className="form-label"> Item Price </label> <input type="text" name="itemPrice" className="form-input" onChange={(e) => setItemPrice(e.target.value)}></input>
+            <label className="form-label"> Item Price </label> <input type="number" name="itemPrice" className="form-input" onChange={(e) => setItemPrice(e.target.value)}></input>
           </fieldset>
           <input class="form-btn" type="submit" id="addSaleItem" value="Add Sale Item" onClick={(handleAdd)}></input>
         </form>
@@ -109,7 +109,7 @@ const SaleItems = () => {
             <input type="hidden"></input>
             <label className="form-label"> Sale Item ID: </label> <DropdownComponent ids={saleItems.map(({ sale_item_id }) => sale_item_id)} onSelect={setUpdateSaleItemId}/>
             <label className="form-label"> Item Name </label> <input type="text" name="itemName" className="form-input" onChange={(e) => setUpdateItemName(e.target.value)}></input>
-            <label className="form-label"> Item Price </label> <input type="text" name="itemPrice" className="form-input" onChange={(e) => setUpdateItemPrice(e.target.value)}></input>
+            <label className="form-label"> Item Price </label> <input type="number" name="itemPrice" className="form-input" onChange={(e) => setUpdateItemPrice(e.target.value)}></input>
           </fieldset>
           <input class="form-btn" type="submit" id="UpdateSaleItem" value="Save Update Sale Item" onClick={(handleUpdate)}></input>
         </form> 
