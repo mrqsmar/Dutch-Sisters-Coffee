@@ -1,9 +1,6 @@
 const IndexRoot = () => { 
 	return (
-	  <div>
-		<h1>Welcome!</h1>
-		<p>Use the links below to find the page you need:</p>
-		<nav>[ <a href="/cafes">Cafes</a> | <a href="/cafes_franchisees">Cafes and Franchisees</a> | <a href="/dues_owed">Dues Owed</a> | <a href="/franchisees">Franchisees</a> | <a href="/inventory_items">Inventory Items</a> |  <a href="/inventory_orders">Inventory Orders</a> | <a href="/sale_items">Sale Items</a> | <a href="/sales">Sales</a> ] </nav>
+	  <div className = "index-root">
 		<h2><a href="/cafes">Cafes</a></h2>
 		<p>You can create a cafe id, and add the address to the table!</p>
 		<h2><a href="/cafes_franchisees">Cafes and Franchisees</a></h2>

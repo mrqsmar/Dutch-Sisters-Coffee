@@ -45,8 +45,15 @@
 /***********************/
 
 body {
+  font-family: 'Peignot', sans-serif;
   background-color: #DCDCDC;
   margin: 0px auto;
+  overflow-y: auto;
+}
+
+.index-root {
+  margin-top: 120px;
+  margin-bottom: 60px;
 }
 
 .header-container {
@@ -85,6 +92,8 @@ body {
   color: rgb(0, 95, 152);
 }
 
+
+
 .entity-page {
   margin-top: 120px;
 }
@@ -98,31 +107,55 @@ table {
   width: 100%;
 }
 
-.thead {
-
+.delete {
+  width: 100%;
+  background-color: #ccc613;
+  color: rgb(118, 94, 13);
 }
 
-.td {
 
+
+
+  tr th {
+    border: 2px solid #c10713;
+    color: #c10713;
+    background-color: #e39b94;
+  }
+tr:nth-child(even) td {
+  background-color: #d7d111;
+  color: #848009;
+}
+
+tr:nth-child(odd) td {
+  background-color: #e39b94;
+  color: #c10713;
+}
+
+
+.td {
+  
 }
 
 .form-container {
   max-width: 400px;
-  margin: 10px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
+  margin: 36px auto;
+  padding: 15px;
+  border: 1px solid rgb(0, 95, 152);
+  color: rgb(0, 95, 152);
   border-radius: 4px;
 }
 
 .form-label {
   display: block;
+  color:rgb(0, 95, 152);
   margin-bottom: 10px;
 }
 
 .form-input {
   width: 100%;
-  padding: 5px;
+  padding: 4px;
   border: 1px solid #ccc;
+  color: rgb(0, 95, 152);
   text-align: center;
   border-radius: 4px;
   margin-bottom: 10px;
@@ -131,10 +164,12 @@ table {
 .form-btn {
   width: 99%;
   margin: 5px auto;
+  background-color: rgb(150,200,255);
+  color:rgb(0, 95, 152);
+
 }
 
 .select-field {
   margin-bottom: 7px;
 }
-
 
