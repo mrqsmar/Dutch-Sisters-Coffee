@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sale Items</title>
+		<link href="../styles/style.css" rel="stylesheet" type="text/css" />
+		<script language="JavaScript">
+			function showform(dowhat) {
+				/*
+				* four DIVS: browse, insert, update, delete
+				* this function sets one visible the others not
+				*/
+				if (dowhat == 'insert'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'block';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'none';
+				}
+				else if (dowhat == 'update'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'block';
+					document.getElementById('delete').style.display = 'none';
+				}
+				else if (dowhat == 'delete'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'block';
+				}
+				else if (dowhat == 'all'){
+					document.getElementById('browse').style.display = 'block';
+					document.getElementById('insert').style.display = 'block';
+					document.getElementById('update').style.display = 'block';
+					document.getElementById('delete').style.display = 'block';
+				}
+				else { //by default display browse
+					document.getElementById('browse').style.display = 'block';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'none';
+				}
+			}
+			function newSaleItem() { showform('insert'); }
+			function updateSaleItem(pid) { showform('update'); }
+			function deleteSaleItem(pid) { showform ('delete'); }
+			function browseSaleItems() { showform ('browse'); }
+			function showAll() { showform ('all'); }
+		</script>
+	</head>
+
+	<body onload="browseSaleItems()">
+		<h1>Sale Items</h1>
+		<p>Use the links below to find the page you need:</p>
+		<nav>
+			[ <a href="/cafes">Cafes</a> | <a href="./cafes_franchisees">Cafes and Franchisees</a> | <a href="/dues_owed">Dues Owed</a> | <a href="/franchisees">Franchisees</a> | <a href="/inventory_items">Inventory Items</a> |  <a href="/inventory_orders">Inventory Orders</a> | <a href="/sale_items">Sale Items</a> | <a href="/sales">Sales</a> ]
+		</nav>
+	
+		<div id="browse">
+			<p><a href="#" onClick="showAll()">Display all forms</a> </p>
+			<table border="1" cellpadding="5">
+				<tr>
+					<th><a href="#" onClick="newSaleItem()">New</a></th>
+					<th></th>
+					<th>id</th>
+					<th>item_name</th>
+					<th>item_price</th>
+				</tr>
+				<tr>
+					<td><a href="#" onClick="updateSale('this.inventoryOrderID')">Edit</a></td>
+					<td><a href="#" onclick="deleteSale('this.inventoryOrderID')">Delete</a></td>
+					<td align="right">1</td>
+					<td>12oz drip coffee</td>
+					<td>2.49</td>
+				</tr>
+			</table>
+			<p>&nbsp;</p>
+		</div> <!-- browse -->
+		
+		<div id="insert">
+			<form method="POST" id="addSaleItem">
+				<legend><strong>Add Sale Item</strong></legend>
+				<fieldset class="fields">
+					<label> item price </label> <input type="text" name="itemPrice">
+					<label> item name </label> <input type="text" name="itemName">
+				</fieldset>
+				<input class="btn" type="submit" id="addSaleItem" value="Add Sale Item">
+				<input class="btn" type="button" value="cancel" onClick="browseSaleItems()">
+			</form>
+		</div><!-- insert -->
+		
+		<p>&nbsp;</p>
+		<div id="update">
+			<form method="POST" id="UpdateCafe">
+				<legend><strong>Update Cafe</strong></legend>
+				<fieldset class="fields">
+					<input type="hidden">
+					<label> ID: </label> 1
+					<label> street address </label> <input type="text" name="streetAddress" value="123">
+					<label> street name </label> <input type="text" name="streetName" value="Santa Claus Lane">
+					<label> city </label> <input type="text" name="city" value="North Pole">
+					<label> state </label> <input type="text" name="state" value="AK">
+					<label> country </label> <input type="text" name="country" value="USA">
+					<label> zip code </label> <input type="text" name="zipCode" value="99999">
+				</fieldset>
+					<input class="btn" type="submit" id="UpdateSaveCafe" value="Save Update Cafe">
+					<input class="btn" type="button" value="cancel" onClick="browseSaleItems()">
+			</form> 
+			</div><!-- update -->
+			
+			<p>&nbsp;</p>
+			<div id="delete" style="display: block">
+			<form method="POST" id="deleteCafe">
+				<legend><strong>Delete Cafe</strong></legend>
+					<fieldset class="fields">
+					<p>Are you sure you wish to delete the following?</p>
+					<input type="hidden" name="cafeID" id="deletecafeID" value="1">
+					<label><strong>ID:</strong></label> 1
+					<label> <strong>Address</strong> </label> 123 Santa Clause Lane, North Pole, AK, USA 99999
+			</fieldset>
+			<input class="btn" type="submit" id="DeleteCafe" value="Delete Cafe">
+					<input class="btn" type="button" value="cancel" onClick="browseSaleItems()">
+			</form> 
+			</div><!-- delete -->
+	</body>
+</html>

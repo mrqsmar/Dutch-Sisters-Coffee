@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Cafes and Franchisees</title>
+		<link href="../styles/style.css" rel="stylesheet" type="text/css" />
+		<script language="JavaScript">
+			function showform(dowhat) {
+				/*
+				* four DIVS: browse, insert, update, delete
+				* this function sets one visible the others not
+				*/
+				if (dowhat == 'insert'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'block';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'none';
+				}
+				else if (dowhat == 'update'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'block';
+					document.getElementById('delete').style.display = 'none';
+				}
+				else if (dowhat == 'delete'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'block';
+				}
+				else if (dowhat == 'all'){
+					document.getElementById('browse').style.display = 'block';
+					document.getElementById('insert').style.display = 'block';
+					document.getElementById('update').style.display = 'block';
+					document.getElementById('delete').style.display = 'block';
+				}
+				else { //by default display browse
+					document.getElementById('browse').style.display = 'block';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'none';
+				}
+			}
+			function newSaleItem() { showform('insert'); }
+			function updateSaleItem(pid) { showform('update'); }
+			function deleteSaleItem(pid) { showform ('delete'); }
+			function browseSaleItems() { showform ('browse'); }
+			function showAll() { showform ('all'); }
+		</script>
+	</head>
+
+	<body onload="browseSaleItems()">
+		<h1>Cafes and Franchisees</h1>
+		<p>Use the links below to find the page you need:</p>
+		<nav>
+			[ <a href="/cafes">Cafes</a> | <a href="./cafes_franchisees">Cafes and Franchisees</a> | <a href="/dues_owed">Dues Owed</a> | <a href="/franchisees">Franchisees</a> | <a href="/inventory_items">Inventory Items</a> |  <a href="/inventory_orders">Inventory Orders</a> | <a href="/sale_items">Sale Items</a> | <a href="/sales">Sales</a> ]
+		</nav>
+		<p>Work in progress...</p>
+	</body>
+</html>

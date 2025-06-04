@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Inventory Orders</title>
+		<link href="../styles/style.css" rel="stylesheet" type="text/css" />
+		<script language="JavaScript">
+			function showform(dowhat) {
+				/*
+				* four DIVS: browse, insert, update, delete
+				* this function sets one visible the others not
+				*/
+				if (dowhat == 'insert'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'block';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'none';
+				}
+				else if (dowhat == 'update'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'block';
+					document.getElementById('delete').style.display = 'none';
+				}
+				else if (dowhat == 'delete'){
+					document.getElementById('browse').style.display = 'none';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'block';
+				}
+				else if (dowhat == 'all'){
+					document.getElementById('browse').style.display = 'block';
+					document.getElementById('insert').style.display = 'block';
+					document.getElementById('update').style.display = 'block';
+					document.getElementById('delete').style.display = 'block';
+				}
+				else { //by default display browse
+					document.getElementById('browse').style.display = 'block';
+					document.getElementById('insert').style.display = 'none';
+					document.getElementById('update').style.display = 'none';
+					document.getElementById('delete').style.display = 'none';
+				}
+			}
+			function newInventoryOrder() { showform('insert'); }
+			function updateInventoryOrder(pid) { showform('update'); }
+			function deleteInventoryOrder(pid) { showform ('delete'); }
+			function browseInventoryOrders() { showform ('browse'); }
+			function showAll() { showform ('all'); }
+		</script>
+	</head>
+
+	<body onload="browseInventoryItems()">
+		<h1>Inventory Orders</h1>
+		<p>Use the links below to find the page you need:</p>
+		<nav>
+			[ <a href="/cafes">Cafes</a> | <a href="./cafes_franchisees">Cafes and Franchisees</a> | <a href="/dues_owed">Dues Owed</a> | <a href="/franchisees">Franchisees</a> | <a href="/inventory_items">Inventory Items</a> |  <a href="/inventory_orders">Inventory Orders</a> | <a href="/sale_items">Sale Items</a> | <a href="/sales">Sales</a> ]
+		</nav>
+	
+		<div id="browse">
+			<p><a href="#" onClick="showAll()">Display all forms</a> </p>
+			<table border="1" cellpadding="5">
+				<tr>
+					<th><a href="#" onClick="newInventoryOrder()">New</a></th>
+					<th></th>
+					<th>id</th>
+					<th>cafe_id</th>
+					<th>item_ordered</th>
+					<th>quantity_ordered</th>
+					<th>amount_due</th>
+				</tr>
+				<tr>
+					<td><a href="#" onClick="updateInventoryOrder('this.inventoryOrderID')">Edit</a></td>
+					<td><a href="#" onclick="deleteInventoryOrder('this.inventoryOrderID')">Delete</a></td>
+					<td align="right">1</td>
+					<td>3</td>
+					<td>1</td>
+					<td>2</td>
+					<td>0.2</td>
+				</tr>
+			</table>
+			<p>&nbsp;</p>
+		</div> <!-- browse -->
+		
+		<div id="insert">
+			<form method="POST" id="addCafe">
+				<legend><strong>Add Cafe</strong></legend>
+				<fieldset class="fields">
+					<label> street address </label> <input type="text" name="streetAddress">
+					<label> street name </label> <input type="text" name="streetName">
+					<label> city </label> <input type="text" name="city">
+					<label> state </label> <input type="text" name="state">
+					<label> country </label> <input type="text" name="country">
+					<label> zip code </label> <input type="text" name="zipCode">
+				</fieldset>
+				<input class="btn" type="submit" id="addCafe" value="Add Cafe">
+				<input class="btn" type="button" value="cancel" onClick="browseInventoryItems()">
+			</form>
+		</div><!-- insert -->
+		
+		<p>&nbsp;</p>
+		<div id="update">
+			<form method="POST" id="UpdateCafe">
+				<legend><strong>Update Cafe</strong></legend>
+				<fieldset class="fields">
+					<input type="hidden">
+					<label> ID: </label> 1
+					<label> street address </label> <input type="text" name="streetAddress" value="123">
+					<label> street name </label> <input type="text" name="streetName" value="Santa Claus Lane">
+					<label> city </label> <input type="text" name="city" value="North Pole">
+					<label> state </label> <input type="text" name="state" value="AK">
+					<label> country </label> <input type="text" name="country" value="USA">
+					<label> zip code </label> <input type="text" name="zipCode" value="99999">
+				</fieldset>
+					<input class="btn" type="submit" id="UpdateSaveCafe" value="Save Update Cafe">
+					<input class="btn" type="button" value="cancel" onClick="browseInventoryItems()">
+			</form> 
+			</div><!-- update -->
+			
+			<p>&nbsp;</p>
+			<div id="delete" style="display: block">
+			<form method="POST" id="deleteCafe">
+				<legend><strong>Delete Cafe</strong></legend>
+					<fieldset class="fields">
+					<p>Are you sure you wish to delete the following?</p>
+					<input type="hidden" name="cafeID" id="deletecafeID" value="1">
+					<label><strong>ID:</strong></label> 1
+					<label> <strong>Address</strong> </label> 123 Santa Clause Lane, North Pole, AK, USA 99999
+			</fieldset>
+			<input class="btn" type="submit" id="DeleteCafe" value="Delete Cafe">
+					<input class="btn" type="button" value="cancel" onClick="browseInventoryItems()">
+			</form> 
+			</div><!-- delete -->
+	</body>
+</html>
